@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using FlightSearch.Business.Entities;
-using FlightSearch.Data.EF;
+using FlightSearch.Data.EF.Entities;
 
 namespace FlightSearch.Business.Configuration
 {
@@ -8,7 +8,7 @@ namespace FlightSearch.Business.Configuration
     {
         public DataBusinessProfile()
         {
-            CreateMap<Airline, AirlineEntity>()
+            CreateMap<Airlines, AirlineEntity>()
                 .ReverseMap();
         }
     }

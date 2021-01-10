@@ -25,7 +25,8 @@ namespace FlightSearch.Business
         public List<AirlineEntity> GetAllAirlines()
         {
             AirlineDataAccess data = new AirlineDataAccess();
-            return data.GetAllAirlines().Select(al => Mapper.Map<AirlineEntity>(al)).ToList();
+            var result = data.GetAllAirlines();
+            return result.Select(al => Mapper.Map<AirlineEntity>(al)).ToList();
         }
     }
 }

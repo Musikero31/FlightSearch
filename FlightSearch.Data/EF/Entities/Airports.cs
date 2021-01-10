@@ -3,20 +3,17 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FlightSearch.Data.EF.Entities
 {
-    [Table("Airline")]
-    public partial class Airlines
+    public class Airports
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
 
-        [StringLength(100)]
-        public string AirlineName { get; set; }
-
         [StringLength(5)]
-        public string CarrierCode { get; set; }
+        public string Code { get; set; }
 
-        public string LogoUrl { get; set; }
+        [StringLength(100)]
+        public string Name { get; set; }
 
         public bool IsActive { get; set; }
     }

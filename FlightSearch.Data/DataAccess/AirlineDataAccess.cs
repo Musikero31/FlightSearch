@@ -1,4 +1,5 @@
 ﻿using FlightSearch.Data.EF;
+using FlightSearch.Data.EF.Entities;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -6,13 +7,13 @@ namespace FlightSearch.Data.DataAccess
 {
     public class AirlineDataAccess
     {
-        public IEnumerable<Airline> GetAllAirlines()
+        public IEnumerable<Airlines> GetAllAirlines()
         {
-            IEnumerable<Airline> result = null;
+            IEnumerable<Airlines> result = null;
 
             using (var context = new FlightSearchContext())
             {
-                var data = context.Airlines.Where(al => al.IsActive).ToList();
+                result = context.Airlines.Where(al => al.IsActive).ToList();
             }
 
             return result;
