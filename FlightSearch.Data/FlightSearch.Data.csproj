@@ -65,12 +65,33 @@
   <ItemGroup>
     <Compile Include="DataAccess\AirlineDataAccess.cs" />
     <Compile Include="EF\Entities\Airlines.cs" />
+    <Compile Include="EF\Entities\AirlineSchedule.cs" />
     <Compile Include="EF\Entities\Airports.cs" />
     <Compile Include="EF\Entities\TimeTables.cs" />
     <Compile Include="EF\FlightSearchContext.cs" />
     <Compile Include="Migrations\202101101558219_Init-FlightSearch.cs" />
     <Compile Include="Migrations\202101101558219_Init-FlightSearch.designer.cs">
       <DependentUpon>202101101558219_Init-FlightSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202101140748107_Add-Airline-To-TimeTables.cs" />
+    <Compile Include="Migrations\202101140748107_Add-Airline-To-TimeTables.designer.cs">
+      <DependentUpon>202101140748107_Add-Airline-To-TimeTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202101140831306_New-Table-AirlineSchedules-And-Table-Name-Updates.cs" />
+    <Compile Include="Migrations\202101140831306_New-Table-AirlineSchedules-And-Table-Name-Updates.designer.cs">
+      <DependentUpon>202101140831306_New-Table-AirlineSchedules-And-Table-Name-Updates.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202101140907304_Add-Columns-AirlineSchedule.cs" />
+    <Compile Include="Migrations\202101140907304_Add-Columns-AirlineSchedule.designer.cs">
+      <DependentUpon>202101140907304_Add-Columns-AirlineSchedule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202101141032190_New-Column-AirlineSchedue-STOPS-AMOUNT.cs" />
+    <Compile Include="Migrations\202101141032190_New-Column-AirlineSchedue-STOPS-AMOUNT.designer.cs">
+      <DependentUpon>202101141032190_New-Column-AirlineSchedue-STOPS-AMOUNT.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202101141034276_Revise-TimeTable-Columns.cs" />
+    <Compile Include="Migrations\202101141034276_Revise-TimeTable-Columns.designer.cs">
+      <DependentUpon>202101141034276_Revise-TimeTable-Columns.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -86,6 +107,21 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202101101558219_Init-FlightSearch.resx">
       <DependentUpon>202101101558219_Init-FlightSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101140748107_Add-Airline-To-TimeTables.resx">
+      <DependentUpon>202101140748107_Add-Airline-To-TimeTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101140831306_New-Table-AirlineSchedules-And-Table-Name-Updates.resx">
+      <DependentUpon>202101140831306_New-Table-AirlineSchedules-And-Table-Name-Updates.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101140907304_Add-Columns-AirlineSchedule.resx">
+      <DependentUpon>202101140907304_Add-Columns-AirlineSchedule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101141032190_New-Column-AirlineSchedue-STOPS-AMOUNT.resx">
+      <DependentUpon>202101141032190_New-Column-AirlineSchedue-STOPS-AMOUNT.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101141034276_Revise-TimeTable-Columns.resx">
+      <DependentUpon>202101141034276_Revise-TimeTable-Columns.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

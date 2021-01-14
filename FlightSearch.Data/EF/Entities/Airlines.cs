@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FlightSearch.Data.EF.Entities
 {
-    [Table("Airline")]
+    [Table("Airlines")]
     public partial class Airlines
     {
         [Key]

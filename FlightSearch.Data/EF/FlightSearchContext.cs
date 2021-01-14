@@ -8,13 +8,13 @@ namespace FlightSearch.Data.EF
     {
         public FlightSearchContext() : base("name=FlightSearchDB")
         {
-            //Database.SetInitializer(new DropCreateDatabaseIfModelChanges<FlightSearchContext>());
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<FlightSearchContext, Configuration>());
         }
 
         public DbSet<Airlines> Airlines { get; set; }
         public DbSet<Airports> Airports { get; set; }
         public DbSet<TimeTables> TimeTables { get; set; }
+        public DbSet<AirlineSchedules> AirlineSchedules { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

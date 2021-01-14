@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FlightSearch.Data.EF.Entities
 {
+    [Table("Airports")]
     public class Airports
     {
         [Key]

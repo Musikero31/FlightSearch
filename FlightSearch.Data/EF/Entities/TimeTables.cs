@@ -9,18 +9,9 @@ namespace FlightSearch.Data.EF.Entities
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
-
-        [Column(TypeName = "date")]
-        public DateTime FlightDate { get; set; }
-
         public DateTime DepartureDate { get; set; }
-
         public DateTime ArrivalDate { get; set; }
-
-        public int FromAirportID { get; set; }
-
-        public int ToAirportID { get; set; }
-
+        public int ScheduleID { get; set; }
         public bool IsActive { get; set; }
     }
 }
