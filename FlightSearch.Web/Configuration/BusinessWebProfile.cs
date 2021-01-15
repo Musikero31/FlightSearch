@@ -10,6 +10,8 @@ namespace FlightSearch.Web.Configuration
         {
             CreateMap<AirlineViewModel, AirlineEntity>()
                 .ReverseMap();
+            CreateMap<TimeTableEntity, TimeTableViewModel>()
+                .ReverseMap();
         }
     }
 }

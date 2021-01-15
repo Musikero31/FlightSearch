@@ -52,10 +52,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AirlineComponent.cs" />
+    <Compile Include="Components\ReferenceComponent.cs" />
+    <Compile Include="Components\FlightComponent.cs" />
     <Compile Include="Configuration\DataBusinessProfile.cs" />
     <Compile Include="Entities\AirlineEntity.cs" />
+    <Compile Include="Entities\AirlineScheduleEntity.cs" />
+    <Compile Include="Entities\AirportEntity.cs" />
+    <Compile Include="Entities\SearchFlightEntity.cs" />
+    <Compile Include="Entities\TimeTableEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\GenericHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FlightSearch.Data\FlightSearch.Data.csproj">

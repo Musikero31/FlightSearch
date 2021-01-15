@@ -22,3 +22,13 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.spacer-10 {
+    height: 10px;
+    clear: both;
+}
+
+.data-table {
+    width: 100%;
+    display: table;
+}

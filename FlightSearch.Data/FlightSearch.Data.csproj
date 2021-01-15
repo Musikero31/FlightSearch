@@ -64,6 +64,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataAccess\AirlineDataAccess.cs" />
+    <Compile Include="DataAccess\AirportDataAccess.cs" />
+    <Compile Include="DataAccess\ScheduleDataAccess.cs" />
+    <Compile Include="DataAccess\TimeTableDataAccess.cs" />
     <Compile Include="EF\Entities\Airlines.cs" />
     <Compile Include="EF\Entities\AirlineSchedule.cs" />
     <Compile Include="EF\Entities\Airports.cs" />
@@ -92,6 +95,10 @@
     <Compile Include="Migrations\202101141034276_Revise-TimeTable-Columns.cs" />
     <Compile Include="Migrations\202101141034276_Revise-TimeTable-Columns.designer.cs">
       <DependentUpon>202101141034276_Revise-TimeTable-Columns.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202101150853474_Change-To-FlightDate.cs" />
+    <Compile Include="Migrations\202101150853474_Change-To-FlightDate.designer.cs">
+      <DependentUpon>202101150853474_Change-To-FlightDate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -122,6 +129,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202101141034276_Revise-TimeTable-Columns.resx">
       <DependentUpon>202101141034276_Revise-TimeTable-Columns.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101150853474_Change-To-FlightDate.resx">
+      <DependentUpon>202101150853474_Change-To-FlightDate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

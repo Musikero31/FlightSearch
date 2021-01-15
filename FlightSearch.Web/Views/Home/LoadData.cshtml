@@ -1,0 +1,114 @@
+﻿@using FlightSearch.Web.Models
+@{
+    ViewBag.Title = "LoadData";
+    var airlines = (List<AirlineViewModel>)ViewData["Airlines"];
+}
+
+<div class="row">
+    <h1>Load Data</h1>
+</div>
+<div class="row">
+    <div class="col-12">
+        <form id="LoadDataForm">
+            <div class="form-row">
+                <div class="form-group col-4">
+                    <label for="FromDate" class="control-label">From Date</label>
+                    <input type="text" class="form-control enter-date" id="FromDate">
+                </div>
+                <div class="form-group col-4">
+                    <label for="ToDate" class="control-label">To Date</label>
+                    <input type="text" class="form-control enter-date" id="ToDate">
+                </div>
+                <div class="form-group col-4">
+                    <label for="Airline">State</label>
+                    <select id="Airline" class="form-control">
+                        <option disabled>Choose...</option>
+                        @{ 
+                            foreach (var item in airlines)
+                            {
+                                <option value="@item.ID">@item.AirlineName</option>
+                            }
+                        }
+                    </select>
+                </div>                
+            </div>
+            <div class="form-row">
+                <div class="form-group col-3 align-text-bottom">
+                    <button id="Process" class="btn btn-outline-success">Process Dates</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <table id="FlightTimeTable" class="table table-bordered table-responsive table-striped data-table">
+        <thead>
+            <tr>
+                <th>Airline</th>
+                <th>Flight Date</th>
+                <th>From Airport</th>
+                <th>To Airport</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+@section Scripts{
+    <script>
+        $(function () {
+            $(".enter-date").datepicker({
+                format: "dd/mm/yyyy",
+                autoclose: true
+            });
+
+            $("#Process").click(function (e) {
+                e.preventDefault();
+
+                let airlineID = $("#Airline").val();
+                let startDate = Util.Date($("#FromDate").val(), "DD/MM/YYYY");
+                let endDate = Util.Date($("#ToDate").val(), "DD/MM/YYYY");
+
+                let param = JSON.stringify({
+                    airlineID: airlineID,
+                    fromDate: startDate,
+                    toDate: endDate
+                });
+
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("GenerateTimeTable", "Home")",
+                    data: param,
+                    contentType: "application/json",
+                    success: function (result) {
+                        console.log(result);
+                        $("#FlightTimeTable").DataTable().ajax.reload();
+                    }
+                })
+            });
+
+            $("#FlightTimeTable").DataTable().clear().destroy();
+            $("#FlightTimeTable").DataTable({
+                autoWidth: false,
+                ajax: {
+                    url: "@Url.Action("GetTimeTable", "Home")",
+                    type: "GET"
+                },
+                columnDefs: [
+                    {
+                        targets: 1,
+                        data: "FlightDate",
+                        render: function (data, row, type) {
+                            return Util.DateString(data, "DD/MM/YYYY");
+                        }
+                    }
+                ],
+                columns: [
+                    { targets: 0, data: "Airline" }, 
+                    { targets: 1, data: "FlightDate" },
+                    { targets: 2, data: "FromAirport" },
+                    { targets: 3, data: "ToAirport" }
+                ]
+            });
+        });
+    </script>
+}
