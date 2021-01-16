@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightSearch.Business", "Fl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightSearch.Data", "FlightSearch.Data\FlightSearch.Data.csproj", "{D396CFD8-9318-44BE-8164-1161706FEA5E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightSearch.Test", "FlightSearch.Test\FlightSearch.Test.csproj", "{2DB2F152-F8B4-4C1B-9046-D322851F1E8D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{D396CFD8-9318-44BE-8164-1161706FEA5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D396CFD8-9318-44BE-8164-1161706FEA5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D396CFD8-9318-44BE-8164-1161706FEA5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DB2F152-F8B4-4C1B-9046-D322851F1E8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DB2F152-F8B4-4C1B-9046-D322851F1E8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DB2F152-F8B4-4C1B-9046-D322851F1E8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DB2F152-F8B4-4C1B-9046-D322851F1E8D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

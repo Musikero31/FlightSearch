@@ -90,7 +90,7 @@
             $("#FlightTimeTable").DataTable({
                 autoWidth: false,
                 ajax: {
-                    url: "@Url.Action("GetTimeTable", "Home")",
+                    url: "@Url.Action("GetTimeTable", "FlightSearch", new { httproute = "DefaultApi" })",
                     type: "GET"
                 },
                 columnDefs: [

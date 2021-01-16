@@ -1,6 +1,8 @@
 ﻿using FlightSearch.Business.Entities;
 using FlightSearch.Data.DataAccess;
 using FlightSearch.Data.EF.Entities;
+using Newtonsoft.Json;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +10,8 @@ using System.Linq;
 namespace FlightSearch.Business.Components
 {
     public class FlightComponent
-    {   
+    {
+        private static readonly Logger _log = LogManager.GetLogger("DebugLoggerRules");
 
         public void GenerateFlights(int airlineID, DateTime fromDate, DateTime toDate)
         {
@@ -66,6 +69,8 @@ namespace FlightSearch.Business.Components
                           FromAirport = src.Name,
                           ToAirport = dest.Name
                       }).ToList();
+
+            _log.Info($"Data retrieved : {JsonConvert.SerializeObject(result)}");
 
             return result;
         }
