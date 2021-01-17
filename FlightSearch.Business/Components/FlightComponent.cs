@@ -31,9 +31,16 @@ namespace FlightSearch.Business.Components
                         TimeTables entity = new TimeTables
                         {
                             FlightDate = counterDate,
-                            ScheduleID = sched.ID,
+                            AirlineID = sched.AirlineID,
+                            Amount = sched.Amount,
+                            Duration = sched.Duration,
+                            FromAirportID = sched.FromAirportID,
+                            ToAirportID = sched.ToAirportID,
+                            Stops = sched.Stops,
                             IsActive = true
                         };
+
+                        _log.Info($"Adding to TimeTables : {JsonConvert.SerializeObject(entity)}");
 
                         timeData.AddTimeTable(entity);
                     }
@@ -47,20 +54,17 @@ namespace FlightSearch.Business.Components
             List<TimeTableEntity> result = null;
             
             TimeTableDataAccess timeData = new TimeTableDataAccess();
-            ScheduleDataAccess schedData = new ScheduleDataAccess();
             AirportDataAccess airportData = new AirportDataAccess();
             AirlineDataAccess airlineData = new AirlineDataAccess();
 
             var timeTables = timeData.GetTimeTables();
-            var schedules = schedData.GetAllSchedules();
             var airlines = airlineData.GetAllAirlines();
             var airports = airportData.GetAllAirports();
 
             result = (from time in timeTables
-                      join sched in schedules on time.ScheduleID equals sched.ID
-                      join line in airlines on sched.AirlineID equals line.ID
-                      join src in airports on sched.FromAirportID equals src.ID
-                      join dest in airports on sched.ToAirportID equals dest.ID
+                      join line in airlines on time.AirlineID equals line.ID
+                      join src in airports on time.FromAirportID equals src.ID
+                      join dest in airports on time.ToAirportID equals dest.ID
                       select new TimeTableEntity
                       {
                           ID = time.ID,

@@ -65,11 +65,13 @@
   <ItemGroup>
     <Compile Include="DataAccess\AirlineDataAccess.cs" />
     <Compile Include="DataAccess\AirportDataAccess.cs" />
+    <Compile Include="DataAccess\FlightSearchDataAccess.cs" />
     <Compile Include="DataAccess\ScheduleDataAccess.cs" />
     <Compile Include="DataAccess\TimeTableDataAccess.cs" />
     <Compile Include="EF\Entities\Airlines.cs" />
     <Compile Include="EF\Entities\AirlineSchedule.cs" />
     <Compile Include="EF\Entities\Airports.cs" />
+    <Compile Include="EF\Entities\FlightSearchResult.cs" />
     <Compile Include="EF\Entities\TimeTables.cs" />
     <Compile Include="EF\FlightSearchContext.cs" />
     <Compile Include="Migrations\202101101558219_Init-FlightSearch.cs" />
@@ -99,6 +101,14 @@
     <Compile Include="Migrations\202101150853474_Change-To-FlightDate.cs" />
     <Compile Include="Migrations\202101150853474_Change-To-FlightDate.designer.cs">
       <DependentUpon>202101150853474_Change-To-FlightDate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202101161528379_Revise-TimeTables.cs" />
+    <Compile Include="Migrations\202101161528379_Revise-TimeTables.designer.cs">
+      <DependentUpon>202101161528379_Revise-TimeTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202101171751119_Create-FlightSearch-StoredProcedure.cs" />
+    <Compile Include="Migrations\202101171751119_Create-FlightSearch-StoredProcedure.designer.cs">
+      <DependentUpon>202101171751119_Create-FlightSearch-StoredProcedure.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -132,6 +142,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202101150853474_Change-To-FlightDate.resx">
       <DependentUpon>202101150853474_Change-To-FlightDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101161528379_Revise-TimeTables.resx">
+      <DependentUpon>202101161528379_Revise-TimeTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101171751119_Create-FlightSearch-StoredProcedure.resx">
+      <DependentUpon>202101171751119_Create-FlightSearch-StoredProcedure.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

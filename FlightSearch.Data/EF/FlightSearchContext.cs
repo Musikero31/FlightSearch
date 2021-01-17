@@ -15,9 +15,10 @@ namespace FlightSearch.Data.EF
         public DbSet<Airports> Airports { get; set; }
         public DbSet<TimeTables> TimeTables { get; set; }
         public DbSet<AirlineSchedules> AirlineSchedules { get; set; }
+        public DbSet<FlightSearchResult> FlightSearchResults { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
+        {            
             modelBuilder.Entity<Airlines>()
                 .Property(e => e.AirlineName)
                 .IsUnicode(false);
@@ -37,6 +38,8 @@ namespace FlightSearch.Data.EF
             modelBuilder.Entity<Airports>()
                 .Property(e => e.Name)
                 .IsUnicode(false);
+
+            
         }
     }
 }

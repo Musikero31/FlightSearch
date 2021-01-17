@@ -59,7 +59,9 @@
     <Compile Include="Components\FlightComponent.cs" />
     <Compile Include="Configuration\DataBusinessProfile.cs" />
     <Compile Include="Entities\AirlineEntity.cs" />
+    <Compile Include="Entities\AirlineOne.cs" />
     <Compile Include="Entities\AirlineScheduleEntity.cs" />
+    <Compile Include="Entities\AirlineTwo.cs" />
     <Compile Include="Entities\AirportEntity.cs" />
     <Compile Include="Entities\SearchFlightEntity.cs" />
     <Compile Include="Entities\TimeTableEntity.cs" />

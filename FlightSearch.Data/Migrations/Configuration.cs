@@ -76,6 +76,8 @@ namespace FlightSearch.Data.Migrations
                 ToAirportID = 3,
                 Duration = new TimeSpan(12, 40, 0),
                 Frequency = "1,2,4,5",
+                Stops = 1,
+                Amount = 3500,
                 IsActive = true
             }, new AirlineSchedules
             {
@@ -85,6 +87,8 @@ namespace FlightSearch.Data.Migrations
                 ToAirportID = 1,
                 Duration = new TimeSpan(15, 20, 0),
                 Frequency = "1,2,4,5",
+                Stops = 1,
+                Amount = 3500,
                 IsActive = true
             }, new AirlineSchedules
             {
@@ -94,7 +98,9 @@ namespace FlightSearch.Data.Migrations
                 ToAirportID = 2,
                 Duration = new TimeSpan(3, 50, 0),
                 Frequency = "2,4,6",
-                IsActive = true
+                IsActive = true,
+                Stops = 1,
+                Amount = 4400,
             }, new AirlineSchedules
             {
                 ID = 4,
@@ -103,7 +109,9 @@ namespace FlightSearch.Data.Migrations
                 ToAirportID = 1,
                 Duration = new TimeSpan(3, 45, 0),
                 Frequency = "2,4,6",
-                IsActive = true
+                IsActive = true,
+                Stops = 1,
+                Amount = 4400
             }, new AirlineSchedules
             {
                 ID = 5,
@@ -112,7 +120,9 @@ namespace FlightSearch.Data.Migrations
                 ToAirportID = 2,
                 Frequency = "1,3,5",
                 Duration = new TimeSpan(4, 0, 0),
-                IsActive = true
+                IsActive = true,
+                Stops = 1,
+                Amount = 6000
             }, new AirlineSchedules
             {
                 ID = 6,
@@ -121,7 +131,9 @@ namespace FlightSearch.Data.Migrations
                 ToAirportID = 1,
                 Frequency = "1,3,5",
                 Duration = new TimeSpan(4, 15, 0),
-                IsActive = true
+                IsActive = true,
+                Stops = 1,
+                Amount = 6000
             }, new AirlineSchedules
             {
                 ID = 7,
@@ -130,7 +142,9 @@ namespace FlightSearch.Data.Migrations
                 ToAirportID = 2,
                 Frequency = "1,3,4",
                 Duration = new TimeSpan(4, 5, 0),
-                IsActive = true
+                IsActive = true,
+                Stops = 1,
+                Amount = 2000,
             }, new AirlineSchedules
             {
                 ID = 8,
@@ -139,7 +153,9 @@ namespace FlightSearch.Data.Migrations
                 ToAirportID = 1,
                 Frequency = "1,3,4",
                 Duration = new TimeSpan(4, 0, 0),
-                IsActive = true
+                IsActive = true,
+                Stops = 1,
+                Amount = 2000
             }, new AirlineSchedules
             {
                 ID = 9,
@@ -148,7 +164,9 @@ namespace FlightSearch.Data.Migrations
                 ToAirportID = 3,
                 Frequency = "5,6,7",
                 Duration = new TimeSpan(15, 10, 0),
-                IsActive = true
+                IsActive = true,
+                Stops = 1,
+                Amount = 6500
             }, new AirlineSchedules
             {
                 ID = 10,
@@ -157,7 +175,9 @@ namespace FlightSearch.Data.Migrations
                 ToAirportID = 1,
                 Frequency = "5,6,7",
                 Duration = new TimeSpan(17, 40, 0),
-                IsActive = true
+                IsActive = true,
+                Stops = 1,
+                Amount = 6500
             });
         }
     }
