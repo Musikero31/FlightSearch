@@ -12,6 +12,8 @@ namespace FlightSearch.Web.Configuration
                 .ReverseMap();
             CreateMap<TimeTableEntity, TimeTableViewModel>()
                 .ReverseMap();
+            CreateMap<FlightSearchQuery, QueryViewModel>()
+                .ReverseMap();
         }
     }
 }

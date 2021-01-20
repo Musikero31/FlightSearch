@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using NLog;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 
 namespace FlightSearch.Business.Components
@@ -75,6 +76,67 @@ namespace FlightSearch.Business.Components
                       }).ToList();
 
             _log.Info($"Data retrieved : {JsonConvert.SerializeObject(result)}");
+
+            return result;
+        }
+
+        public List<AirlineOne> GetSearchAirlineOne(FlightSearchQuery query)
+        {
+            List<AirlineOne> result = null;
+
+            FlightSearchDataAccess dataAccess = new FlightSearchDataAccess();
+            var data = dataAccess.GetData(query.FromAirport, query.ToAirport, query.DepartureDate, query.ArrivalDate);
+            if (data == null)
+            {
+                return result;
+            }
+
+            result = new List<AirlineOne>();
+            result = (from DataRow row in data.Rows
+                      select new AirlineOne
+                      {
+                          AirlineLogoAddress = row["AirlineLogo"].ToString(),
+                          AirlineName = row["AirlineName"].ToString(),
+                          InboundFlightDuration = TimeSpan.Parse(row["InboundFlightDuration"].ToString()),
+                          IteneraryID = null,
+                          OutboundFlightDuration = TimeSpan.Parse(row["OutboundFlightDuration"].ToString()),
+                          Stops = Convert.ToInt32(row["Stops"]),
+                          TotalAmount = Convert.ToDecimal(row["Amount"])
+                      }).ToList();
+
+            return result;
+        }
+
+        public AirlineTwo GetSearchAirlineTwo(FlightSearchQuery query)
+        {
+            AirlineTwo result = null;
+
+            FlightSearchDataAccess dataAccess = new FlightSearchDataAccess();
+            var data = dataAccess.GetData(query.FromAirport, query.ToAirport, query.DepartureDate, query.ArrivalDate);
+            if (data == null)
+            {
+                return result;
+            }
+
+            List<string> carrierCodes = (from DataRow row in data.Rows
+                                         select row["CarrierCode"].ToString()).Distinct().ToList();
+
+            List<AirlineOne> innerResult = (from DataRow row in data.Rows
+                                            select new AirlineOne
+                                            {
+                                                AirlineLogoAddress = row["AirlineLogo"].ToString(),
+                                                AirlineName = row["AirlineName"].ToString(),
+                                                InboundFlightDuration = TimeSpan.Parse(row["InboundFlightDuration"].ToString()),
+                                                IteneraryID = null,
+                                                OutboundFlightDuration = TimeSpan.Parse(row["OutboundFlightDuration"].ToString()),
+                                                Stops = Convert.ToInt32(row["Stops"]),
+                                                TotalAmount = Convert.ToDecimal(row["Amount"])
+                                            }).ToList();
+            result = new AirlineTwo
+            {
+                CarrierCodes = new List<string>(carrierCodes),
+                Results = new List<AirlineOne>(innerResult)
+            };
 
             return result;
         }

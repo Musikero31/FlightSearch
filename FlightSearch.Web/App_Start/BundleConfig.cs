@@ -25,13 +25,14 @@ namespace FlightSearch.Web
             bundles.Add(new ScriptBundle("~/bundles/js").Include(
                 "~/Scripts/moment/moment.js",
                 "~/Scripts/Bootstrap-Datepicker/bootstrap-datepicker.js",
+                "~/Scripts/font-awesome/js/fontawesome.js",
                 "~/Scripts/Util.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/Bootstrap-Datepicker/bootstrap-datepicker3.css",
                       "~/Content/DataTables/css/dataTables.bootstrap4.css",
-                      "~/Content/font-awesome/font-awesome.css",
+                      "~/Content/font-awesome/css/all.css",
                       "~/Content/site.css"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're

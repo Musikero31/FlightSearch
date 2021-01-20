@@ -22,6 +22,13 @@ namespace FlightSearch.Web.Controllers
             return View();
         }
 
+        public async Task<ActionResult> AirlineSearch()
+        {
+            await PopulateReferences();
+
+            return View();
+        }
+
         [HttpGet]
         public ActionResult GetAllAirlines()
         {
