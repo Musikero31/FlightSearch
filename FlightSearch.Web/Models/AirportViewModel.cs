@@ -1,6 +1,6 @@
-﻿namespace FlightSearch.Business.Entities
+﻿namespace FlightSearch.Web.Models
 {
-    public class AirportEntity
+    public class AirportViewModel
     {
         public int ID { get; set; }
         public string Code { get; set; }

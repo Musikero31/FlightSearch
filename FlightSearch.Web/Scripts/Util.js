@@ -26,8 +26,11 @@
         return date.format(format);
     },
 
-    JSONDate: function (dateString) {
-        var date = moment(dateString, "DD MMM YYYY");
+    JSONDate: function (dateString, format) {
+        if (format === undefined) {
+            format = "DD MMM YYYY";
+        }
+        var date = moment(dateString, format);
 
         if (!date.isValid()) {
             return null;
@@ -41,7 +44,7 @@
     },
 
     Date: function (dateString, format) {
-        if (format !== undefined)
+        if (format === undefined)
             format = "DD/MM/YYYY HH:MM:SS";
         var date = moment(dateString, format);
 
@@ -169,6 +172,22 @@
         }
 
         return $(id).select2("data")[0].id;
+    },
+
+    formatMoney: function (amount, decimalCount = 2, decimal = ".", thousands = ",") {
+        try {
+            decimalCount = Math.abs(decimalCount);
+            decimalCount = isNaN(decimalCount) ? 2 : decimalCount;
+
+            const negativeSign = amount < 0 ? "-" : "";
+
+            let i = parseInt(amount = Math.abs(Number(amount) || 0).toFixed(decimalCount)).toString();
+            let j = (i.length > 3) ? i.length % 3 : 0;
+
+            return negativeSign + (j ? i.substr(0, j) + thousands : '') + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thousands) + (decimalCount ? decimal + Math.abs(amount - i).toFixed(decimalCount).slice(2) : "");
+        } catch (e) {
+            console.log(e);
+        }
     }
 };
 

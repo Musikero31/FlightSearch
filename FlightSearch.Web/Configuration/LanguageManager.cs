@@ -10,28 +10,29 @@ namespace FlightSearch.Web.Configuration
 {
     public class LanguageManager
     {
-        public string GetDefaultLanguage
-        {
-            get
-            {
-                return _languages[0].CultureCode;
-            }
-        }
-
-        public static List<Language> _languages = new List<Language>
+        private static readonly List<Language> _languages = new List<Language>
         {
             new Language
             {
                 Name = "English",
                 CultureCode = "EN"
+            },
+            new Language
+            {
+                Name = "Malaysia",
+                CultureCode = "MY"
             }
         };
 
+        public string GetDefaultLanguage => _languages[0].CultureCode;
+
+        public static List<Language> Languages => _languages;
+
         public void SetLanguage(string language)
         {
-            if (!_languages.Any(lang => lang.Name == language))
+            if (!Languages.Any(lang => lang.Name == language))
             {
-                language = _languages[0].CultureCode;
+                language = Languages[0].CultureCode;
             }
 
             var culture = new CultureInfo(language);

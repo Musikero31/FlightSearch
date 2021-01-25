@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")    
+    @Styles.Render("~/Content/css")
 </head>
 <body>
     <div class="container sticky-top">
@@ -16,8 +16,13 @@
                 <li class="nav-item">@Html.ActionLink("Search Flights", "AirlineSearch", "Home", new { @class = "nav-link" })</li>
             </ul>
             <div class="float-right">
-                <select class="form-control" id="ChangeLanguage">
-                    <option>Test</option>
+                <select class="form-control" id="ChangeLang">
+                    @{
+                        foreach (var lang in FlightSearch.Web.Configuration.LanguageManager.Languages)
+                        {
+                            <option value="@lang.CultureCode">@lang.Name</option>
+                        }
+                    }
                 </select>
             </div>
         </nav>
@@ -34,6 +39,14 @@
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/DataTables")
     @Scripts.Render("~/bundles/js");
+    <script>
+        $(function () {
+            $("#ChangeLang").change(function (e) {
+                e.preventDefault();
+                
+            });
+        });
+    </script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

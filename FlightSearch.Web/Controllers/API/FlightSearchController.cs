@@ -22,7 +22,7 @@ namespace FlightSearch.Web.Controllers.API
         }
 
         [HttpGet]
-        public IHttpActionResult AirlineOne(QueryViewModel query)
+        public IHttpActionResult AirlineOne([FromUri] QueryViewModel query)
         {
             FlightComponent component = new FlightComponent();
             var result = component.GetSearchAirlineOne(WebMapper.Mapper.Map<FlightSearchQuery>(query));
@@ -31,7 +31,7 @@ namespace FlightSearch.Web.Controllers.API
         }
 
         [HttpGet]
-        public IHttpActionResult AirlineTwo(QueryViewModel query)
+        public IHttpActionResult AirlineTwo([FromUri] QueryViewModel query)
         {
             FlightComponent component = new FlightComponent();
             var result = component.GetSearchAirlineTwo(WebMapper.Mapper.Map<FlightSearchQuery>(query));

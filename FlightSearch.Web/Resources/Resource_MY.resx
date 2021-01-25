@@ -118,39 +118,39 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AirlineLogo" xml:space="preserve">
-    <value>Airline Logo</value>
+    <value>Logo Syarikat Penerbangan</value>
   </data>
   <data name="AirlineName" xml:space="preserve">
-    <value>Airline Name</value>
+    <value>Name Syarikat Penerbangan</value>
   </data>
   <data name="Clear" xml:space="preserve">
     <value>Clear</value>
   </data>
   <data name="FromAirport" xml:space="preserve">
-    <value>Flying From</value>
+    <value>Dari</value>
   </data>
   <data name="FromDate" xml:space="preserve">
-    <value>Departing On</value>
+    <value>Berlepas</value>
   </data>
   <data name="InboundFlightDuration" xml:space="preserve">
-    <value>Inbound Flight Duration</value>
+    <value>Tempoh Penerbangan Masuk</value>
   </data>
   <data name="OutboundFlightDuration" xml:space="preserve">
-    <value>Outbound Flight Duration</value>
+    <value>Tempoh Penerbangan Keluar</value>
   </data>
   <data name="Search" xml:space="preserve">
     <value>Search</value>
   </data>
   <data name="Stops" xml:space="preserve">
-    <value>Stops</value>
+    <value>Berhenti</value>
   </data>
   <data name="ToAirport" xml:space="preserve">
-    <value>Flying To</value>
+    <value>Ke</value>
   </data>
   <data name="ToDate" xml:space="preserve">
-    <value>Returning On</value>
+    <value>Pergi Balik</value>
   </data>
   <data name="TotalAmount" xml:space="preserve">
-    <value>Total Amount</value>
+    <value>Jumlah Keseluruhan</value>
   </data>
 </root>

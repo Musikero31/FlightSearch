@@ -110,6 +110,10 @@
     <Compile Include="Migrations\202101171751119_Create-FlightSearch-StoredProcedure.designer.cs">
       <DependentUpon>202101171751119_Create-FlightSearch-StoredProcedure.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202101250859369_Alter-SearchFlight-StoredProcedure.cs" />
+    <Compile Include="Migrations\202101250859369_Alter-SearchFlight-StoredProcedure.designer.cs">
+      <DependentUpon>202101250859369_Alter-SearchFlight-StoredProcedure.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\IRepository.cs" />
@@ -148,6 +152,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202101171751119_Create-FlightSearch-StoredProcedure.resx">
       <DependentUpon>202101171751119_Create-FlightSearch-StoredProcedure.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101250859369_Alter-SearchFlight-StoredProcedure.resx">
+      <DependentUpon>202101250859369_Alter-SearchFlight-StoredProcedure.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -62,11 +62,20 @@ namespace FlightSearch.Web.Controllers
             return Json(true);
         }
 
+        [HttpPost]
+        public ActionResult ChangeLanguage(string lang)
+        {
+            new LanguageManager().SetLanguage(lang);
+            return RedirectToAction("Index", "Home");
+        }
+
         private async Task PopulateReferences()
         {
             ReferenceComponent refComp = new ReferenceComponent();
             var airlines = await refComp.GetAllAirlinesAsync();
+            var airports = await refComp.GetAllAirportsAsync();
             ViewData["Airlines"] = airlines.Select(al => WebMapper.Mapper.Map<AirlineViewModel>(al)).ToList();
+            ViewData["Airports"] = airports.Select(ap => WebMapper.Mapper.Map<AirportViewModel>(ap)).ToList();
         }
     }
 }

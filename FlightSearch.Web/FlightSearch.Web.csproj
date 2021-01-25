@@ -158,10 +158,16 @@
     </Compile>
     <Compile Include="Models\AirlineOneViewModel.cs" />
     <Compile Include="Models\AirlineViewModel.cs" />
+    <Compile Include="Models\AirportViewModel.cs" />
     <Compile Include="Models\Language.cs" />
     <Compile Include="Models\QueryViewModel.cs" />
     <Compile Include="Models\TimeTableViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\Resource_MY.Designer.cs">
+      <DependentUpon>Resource_MY.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Resources\Resource_EN.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -716,6 +722,10 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Resources\Resource_MY.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource_MY.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Resource_EN.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource_EN.Designer.cs</LastGenOutput>

@@ -19,7 +19,7 @@ namespace FlightSearch.Business.Components
             });
         }
 
-        public Task<List<AirportEntity>> GetAllAirports()
+        public Task<List<AirportEntity>> GetAllAirportsAsync()
         {
             return Task.Run(() =>
             {

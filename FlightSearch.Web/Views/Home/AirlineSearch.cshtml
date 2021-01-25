@@ -1,8 +1,180 @@
 ﻿@model FlightSearch.Web.Models.QueryViewModel
-
+@using FlightSearch.Web.Resources
+@using FlightSearch.Web.Models
 @{
-    ViewBag.Title = "AirlineSearch";
+    ViewBag.Title = "Airline Search";
+    var airports = (List<AirportViewModel>)ViewData["Airports"];
 }
 
-<h2>Airline Search</h2>
+<div class="row">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header">@ViewBag.Title</div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12">
+                        <form id="SearchForm">
+                            <div class="form-row">
+                                <div class="form-group col-3">
+                                    @Html.LabelFor(model => model.FromAirport)
+                                    <select id="FromAirport" class="form-control">
+                                        <option disabled selected value="">Please Select</option>
+                                        @{ 
+                                            foreach (var item in airports)
+                                            {
+                                                <option value="@item.Code">@item.Name</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                                <div class="form-group col-3">
+                                    @Html.LabelFor(model => model.ToAirport)
+                                    <select id="ToAirport" class="form-control">
+                                        <option disabled selected value="">Please Select</option>
+                                        @{
+                                            foreach (var item in airports)
+                                            {
+                                                <option value="@item.Code">@item.Name</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                                <div class="form-group col-3">
+                                    @Html.LabelFor(model => model.DepartureDate)
+                                    <div class="input-group mb-3 date" data-date-format="dd-mm-yyyy">
+                                        <input id="FromDate" class="form-control" placeholder="dd/mm/yyyy">
+                                        <div class="input-group-append">
+                                            <label class="input-group-text" for="FromDate"><i class="fa fa-calendar-alt"></i></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-3">
+                                    @Html.LabelFor(model => model.ArrivalDate)
+                                    <div class="input-group mb-3 date" data-date-format="dd-mm-yyyy">
+                                        <input id="ToDate" class="form-control" placeholder="dd/mm/yyyy">
+                                        <div class="input-group-append">
+                                            <label class="input-group-text" for="ToDate"><i class="fa fa-calendar-alt"></i></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-3">
+                                    <button class="btn btn-outline-success" id="Search">@Resource_EN.Search</button>
+                                    <button class="btn btn-outline-dark" id="Clear">@Resource_EN.Clear</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="row">
+                    <table id="ResultTable" class="table table-bordered table-responsive table-striped data-table">
+                        <thead>
+                            <tr>
+                                <th>@Resource_EN.AirlineLogo</th>
+                                <th>@Resource_EN.AirlineName</th>
+                                <th>@Resource_EN.InboundFlightDuration</th>
+                                <th>@Resource_EN.OutboundFlightDuration</th>
+                                <th>@Resource_EN.Stops</th>
+                                <th>@Resource_EN.TotalAmount</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script>
+        $(function () {
+            $(".date input").datepicker({
+                format: "dd/mm/yyyy",
+                autoclose: true
+            });
 
+            $("#ResultTable").DataTable().clear().destroy();
+            $("#ResultTable").DataTable();
+
+            $("#Search").click(function (e) {
+                e.preventDefault();
+                let param = {
+                    "FromAirport": $("#FromAirport").val(),
+                    "ToAirport": $("#ToAirport").val(),
+                    "DepartureDate": Util.JSONDate($("#FromDate").val(), "DD/MM/YYYY"),
+                    "ArrivalDate": Util.JSONDate($("#ToDate").val(), "DD/MM/YYYY")
+                };
+
+                $.get("@Url.Action("AirlineOne", "FlightSearch", new { httproute = "DefaultApi" })", param, function (result) {
+                    let data = {
+                        data: result
+                    };
+
+                    $("#ResultTable").DataTable().clear().destroy();
+                    $("#ResultTable").DataTable({
+                        data: result,
+                        columnDefs: [
+                            {
+                                targets: 0,
+                                data: "AirlineLogoAddress",
+                                searchable: false,
+                                orderable: false,
+                                render: function (data) {
+                                    return `<img src="${data}" width="50" height="60">`;
+                                }
+                            },                            
+                            {
+                                targets: 5,
+                                data: "TotalAmount",
+                                searchable: false,
+                                orderable: true,
+                                render: function (data) {
+                                    return "USD " + Util.formatMoney(data);
+                                }
+                            }
+                        ],
+                        columns: [
+                            { targets: 0, data: "AirlineLogoAddress" },
+                            { targets: 1, data: "AirlineName" },
+                            { targets: 2, data: "InboundFlightDuration" },
+                            { targets: 3, data: "OutboundFlightDuration" },
+                            { targets: 4, data: "Stops" },
+                            { targets: 5, data: "TotalAmount" }
+                        ],
+                        initComplete: function (settings, json) {
+                            console.log("Retrieved result", json);
+                        }
+                    })
+                });
+
+                @*$("#ResultTable").DataTable().clear().destroy();
+                $("#ResultTable").DataTable({
+                    ajax: {
+                        url: "@Url.Action("AirlineOne", "FlightSearch", new { httproute = "DefaultApi" })",
+                        type: "GET",
+                        contentType: "application/json",
+                        data: function (data) {
+                            data.FromAirport = $("#FromAirport").val();
+                            data.ToAirport = $("#ToAirport").val();
+                            data.DepartureDate = Util.JSONDate($("#FromDate").val(), "DD/MM/YYYY");
+                            data.ArrivalDate = Util.JSONDate($("#ToDate").val(), "DD/MM/YYYY");
+                        }
+                    },
+                    columns: [
+                        { targets: 0, data: "AirlineLogoAddress" },
+                        { targets: 1, data: "AirlineName" },
+                        { targets: 2, data: "InboundFlightDuration" },
+                        { targets: 3, data: "OutboundFlightDuration" },
+                        { targets: 4, data: "Stops" },
+                        { targets: 5, data: "TotalAmount" }
+                    ],
+                    columnDefs: [],
+                    initComplete: function (settings, json) {
+                        console.log("Retrieved result", json);
+                    }
+                })*@
+
+            });
+        });
+    </script>
+}
