@@ -124,7 +124,7 @@
     <value>Name Syarikat Penerbangan</value>
   </data>
   <data name="Clear" xml:space="preserve">
-    <value>Clear</value>
+    <value>Membersihkan</value>
   </data>
   <data name="FromAirport" xml:space="preserve">
     <value>Dari</value>
@@ -139,7 +139,7 @@
     <value>Tempoh Penerbangan Keluar</value>
   </data>
   <data name="Search" xml:space="preserve">
-    <value>Search</value>
+    <value>Mencari</value>
   </data>
   <data name="Stops" xml:space="preserve">
     <value>Berhenti</value>

@@ -154,7 +154,7 @@
                     $(error).insertAfter($(element).closest("div"));
                 }
                 else if ($(element).closest("div").hasClass("input-group")) {
-                    $(error).insertAfter("div.input-group");
+                    $(error).insertAfter($(element).closest("div.input-group"));
                 }
                 else if ($(element).siblings("span").hasClass("select2")) {
                     $(error).appendTo($(element).siblings(".select2-error"));

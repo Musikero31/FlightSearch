@@ -62,12 +62,12 @@ namespace FlightSearch.Web.Controllers
             return Json(true);
         }
 
-        [HttpPost]
-        public ActionResult ChangeLanguage(string lang)
-        {
-            new LanguageManager().SetLanguage(lang);
-            return RedirectToAction("Index", "Home");
-        }
+        //[HttpPost]
+        //public ActionResult ChangeLanguage(string lang)
+        //{
+        //    new LanguageManager().SetLanguage(lang);
+        //    return RedirectToAction("Index", "Home");
+        //}
 
         private async Task PopulateReferences()
         {

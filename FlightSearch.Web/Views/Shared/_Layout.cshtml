@@ -9,7 +9,7 @@
 <body>
     <div class="container sticky-top">
         <nav class="navbar navbar-expand-sm bg-dark navbar-dark ">
-            @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            @Html.ActionLink("Flight Search", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             <ul class="navbar-nav">
                 <li class="nav-item">@Html.ActionLink("Home", "Index", "Home", new { @class = "nav-link" })</li>
                 <li class="nav-item">@Html.ActionLink("Load Data", "LoadData", "Home", new { @class = "nav-link" })</li>
@@ -36,17 +36,37 @@
     </div>
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/DataTables")
     @Scripts.Render("~/bundles/js");
-    <script>
-        $(function () {
-            $("#ChangeLang").change(function (e) {
-                e.preventDefault();
-                
+<script>
+    $(function () {
+        $("#ChangeLang").val("@Request.Cookies["culture"].Value");
+
+        $("#ChangeLang").change(function (e) {
+            e.preventDefault();
+            let changeLang = $("#ChangeLang").val();
+
+                @*$.post("@Url.Action("ChangeLanguage", "FlightSearch", new { httproute = "DefaultApi" })",
+                    { "lang": lang }, function () {
+                        console.log("success");
+                        window.location.reload();
+                });*@
+            $.ajax({
+                url: "@Url.Action("ChangeLanguage", "FlightSearch", new { httproute = "DefaultApi" })",
+                data: { "lang": changeLang },
+                dataType: 'json',
+                contentType: "application/json",
+                type: "GET",
+                success: function (result) {
+                    console.log(result);
+                    window.location.reload();
+                }
             });
         });
-    </script>
+    });
+</script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

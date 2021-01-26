@@ -17,7 +17,7 @@
                             <div class="form-row">
                                 <div class="form-group col-3">
                                     @Html.LabelFor(model => model.FromAirport)
-                                    <select id="FromAirport" class="form-control">
+                                    <select id="FromAirport" class="form-control airport">
                                         <option disabled selected value="">Please Select</option>
                                         @{ 
                                             foreach (var item in airports)
@@ -29,7 +29,7 @@
                                 </div>
                                 <div class="form-group col-3">
                                     @Html.LabelFor(model => model.ToAirport)
-                                    <select id="ToAirport" class="form-control">
+                                    <select id="ToAirport" class="form-control airport">
                                         <option disabled selected value="">Please Select</option>
                                         @{
                                             foreach (var item in airports)
@@ -60,8 +60,8 @@
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-3">
-                                    <button class="btn btn-outline-success" id="Search">@Resource_EN.Search</button>
-                                    <button class="btn btn-outline-dark" id="Clear">@Resource_EN.Clear</button>
+                                    <button class="btn btn-outline-success" id="Search">@Resource.Search</button>
+                                    <button class="btn btn-outline-dark" id="Clear">@Resource.Clear</button>
                                 </div>
                             </div>
                         </form>
@@ -71,12 +71,12 @@
                     <table id="ResultTable" class="table table-bordered table-responsive table-striped data-table">
                         <thead>
                             <tr>
-                                <th>@Resource_EN.AirlineLogo</th>
-                                <th>@Resource_EN.AirlineName</th>
-                                <th>@Resource_EN.InboundFlightDuration</th>
-                                <th>@Resource_EN.OutboundFlightDuration</th>
-                                <th>@Resource_EN.Stops</th>
-                                <th>@Resource_EN.TotalAmount</th>
+                                <th>@Resource.AirlineLogo</th>
+                                <th>@Resource.AirlineName</th>
+                                <th>@Resource.InboundFlightDuration</th>
+                                <th>@Resource.OutboundFlightDuration</th>
+                                <th>@Resource.Stops</th>
+                                <th>@Resource.TotalAmount</th>
                             </tr>
                         </thead>
                     </table>
@@ -93,11 +93,30 @@
                 autoclose: true
             });
 
-            $("#ResultTable").DataTable().clear().destroy();
+            $("#SearchForm input, #SearchForm select").each(function (index, obj) {
+                let name = $(obj).attr("id");
+                $(obj).attr("name", name);
+            });
+
+            Util.initFormValidator("#SearchForm", ValidationRules());
+            CustomValidations();
+
             $("#ResultTable").DataTable();
+
+            $("#Clear").click(function (e) {
+                e.preventDefault();
+
+                $(".airport").get(0).selectedIndex = 0;
+                $("#FromDate, #ToDate").val("");
+            })
 
             $("#Search").click(function (e) {
                 e.preventDefault();
+
+                if (!$("#SearchForm").valid()) {
+                    return;
+                }
+
                 let param = {
                     "FromAirport": $("#FromAirport").val(),
                     "ToAirport": $("#ToAirport").val(),
@@ -106,9 +125,7 @@
                 };
 
                 $.get("@Url.Action("AirlineOne", "FlightSearch", new { httproute = "DefaultApi" })", param, function (result) {
-                    let data = {
-                        data: result
-                    };
+                    console.log("Retrieved data", result);
 
                     $("#ResultTable").DataTable().clear().destroy();
                     $("#ResultTable").DataTable({
@@ -140,41 +157,74 @@
                             { targets: 3, data: "OutboundFlightDuration" },
                             { targets: 4, data: "Stops" },
                             { targets: 5, data: "TotalAmount" }
-                        ],
-                        initComplete: function (settings, json) {
-                            console.log("Retrieved result", json);
-                        }
+                        ]
                     })
-                });
-
-                @*$("#ResultTable").DataTable().clear().destroy();
-                $("#ResultTable").DataTable({
-                    ajax: {
-                        url: "@Url.Action("AirlineOne", "FlightSearch", new { httproute = "DefaultApi" })",
-                        type: "GET",
-                        contentType: "application/json",
-                        data: function (data) {
-                            data.FromAirport = $("#FromAirport").val();
-                            data.ToAirport = $("#ToAirport").val();
-                            data.DepartureDate = Util.JSONDate($("#FromDate").val(), "DD/MM/YYYY");
-                            data.ArrivalDate = Util.JSONDate($("#ToDate").val(), "DD/MM/YYYY");
-                        }
-                    },
-                    columns: [
-                        { targets: 0, data: "AirlineLogoAddress" },
-                        { targets: 1, data: "AirlineName" },
-                        { targets: 2, data: "InboundFlightDuration" },
-                        { targets: 3, data: "OutboundFlightDuration" },
-                        { targets: 4, data: "Stops" },
-                        { targets: 5, data: "TotalAmount" }
-                    ],
-                    columnDefs: [],
-                    initComplete: function (settings, json) {
-                        console.log("Retrieved result", json);
-                    }
-                })*@
-
+                });                
             });
         });
+
+        function ValidationRules() {
+            return {
+                rules: {
+                    "FromAirport": {
+                        required: true,
+                        airports: true
+                    },
+                    "ToAirport": {
+                        required: true,
+                        airports: true
+                    },
+                    "FromDate": {
+                        required: true,
+                        startdate: true
+                    }, 
+                    "ToDate": {
+                        required: true,
+                        enddate: true
+                    }
+                },
+                messages: {
+                    "FromAirport": {
+                        required: "Please select airport"
+                    },
+                    "ToAirport": {
+                        required: "Please select airport"
+                    },
+                    "FromDate": {
+                        required: "Please enter date"
+                    },
+                    "ToDate": {
+                        required: "Please enter date"
+                    }
+                }
+            };
+        }
+
+        function CustomValidations() {
+            $.validator.addMethod("startdate", function (value, element) {
+                console.log("Start date to validate", value);
+                let endDate = $("#ToDate").val();
+                let isValid = moment(Util.Date(value, "DD/MM/YYYY")).isBefore(Util.Date(endDate, "DD/MM/YYYY"));
+
+                return isValid;
+            }, "Start date should be less than end date");
+
+            $.validator.addMethod("enddate", function (value, element) {
+                console.log("End date to validate", value);
+                let startDate = $("#FromDate").val();
+                let isValid = moment(Util.Date(value, "DD/MM/YYYY")).isAfter(Util.Date(startDate, "DD/MM/YYYY"));
+
+                return isValid;
+            }, "End date should be greater than start date");
+
+            $.validator.addMethod("airports", function (value, element) {
+                let values = [];
+                $(".airport").each(function (index, obj) {
+                    values.push($(obj).val());
+                });
+
+                return values[0] !== values[1];
+            }, "Airports cannot be the same")
+        }
     </script>
 }

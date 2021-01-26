@@ -22,14 +22,14 @@ namespace FlightSearch.Web.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Resource_MY {
+    public class Resource {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resource_MY() {
+        internal Resource() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace FlightSearch.Web.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("FlightSearch.Web.Resources.Resource_MY", typeof(Resource_MY).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("FlightSearch.Web.Resources.Resource", typeof(Resource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,7 +61,7 @@ namespace FlightSearch.Web.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Logo Syarikat Penerbangan.
+        ///   Looks up a localized string similar to Airline Logo.
         /// </summary>
         public static string AirlineLogo {
             get {
@@ -70,7 +70,7 @@ namespace FlightSearch.Web.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Name Syarikat Penerbangan.
+        ///   Looks up a localized string similar to Airline Name.
         /// </summary>
         public static string AirlineName {
             get {
@@ -88,7 +88,7 @@ namespace FlightSearch.Web.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Dari.
+        ///   Looks up a localized string similar to Flying From.
         /// </summary>
         public static string FromAirport {
             get {
@@ -97,7 +97,7 @@ namespace FlightSearch.Web.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Berlepas.
+        ///   Looks up a localized string similar to Departing On.
         /// </summary>
         public static string FromDate {
             get {
@@ -106,7 +106,7 @@ namespace FlightSearch.Web.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tempoh Penerbangan Masuk.
+        ///   Looks up a localized string similar to Inbound Flight Duration.
         /// </summary>
         public static string InboundFlightDuration {
             get {
@@ -115,7 +115,7 @@ namespace FlightSearch.Web.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tempoh Penerbangan Keluar.
+        ///   Looks up a localized string similar to Outbound Flight Duration.
         /// </summary>
         public static string OutboundFlightDuration {
             get {
@@ -133,7 +133,7 @@ namespace FlightSearch.Web.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Berhenti.
+        ///   Looks up a localized string similar to Stops.
         /// </summary>
         public static string Stops {
             get {
@@ -142,7 +142,7 @@ namespace FlightSearch.Web.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ke.
+        ///   Looks up a localized string similar to Flying To.
         /// </summary>
         public static string ToAirport {
             get {
@@ -151,7 +151,7 @@ namespace FlightSearch.Web.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Pergi Balik.
+        ///   Looks up a localized string similar to Returning On.
         /// </summary>
         public static string ToDate {
             get {
@@ -160,7 +160,7 @@ namespace FlightSearch.Web.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Jumlah Keseluruhan.
+        ///   Looks up a localized string similar to Total Amount.
         /// </summary>
         public static string TotalAmount {
             get {

@@ -38,5 +38,12 @@ namespace FlightSearch.Web.Controllers.API
 
             return Ok(result);
         }
+
+        [HttpGet]
+        public IHttpActionResult ChangeLanguage([FromUri] string lang)
+        {
+            new LanguageManager().SetLanguage(lang);
+            return Ok(true);
+        }
     }
 }

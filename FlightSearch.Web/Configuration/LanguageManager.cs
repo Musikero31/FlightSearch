@@ -15,12 +15,12 @@ namespace FlightSearch.Web.Configuration
             new Language
             {
                 Name = "English",
-                CultureCode = "EN"
+                CultureCode = "en"
             },
             new Language
             {
                 Name = "Malaysia",
-                CultureCode = "MY"
+                CultureCode = "ms"
             }
         };
 
@@ -30,7 +30,7 @@ namespace FlightSearch.Web.Configuration
 
         public void SetLanguage(string language)
         {
-            if (!Languages.Any(lang => lang.Name == language))
+            if (!Languages.Any(lang => lang.CultureCode == language))
             {
                 language = Languages[0].CultureCode;
             }
