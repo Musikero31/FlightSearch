@@ -76,6 +76,8 @@
             $("#Process").click(function (e) {
                 e.preventDefault();
 
+                Util.ShowLoading(true);
+
                 let airlineID = $("#Airline").val();
                 let startDate = Util.Date($("#FromDate").val(), "DD/MM/YYYY");
                 let endDate = Util.Date($("#ToDate").val(), "DD/MM/YYYY");
@@ -94,6 +96,9 @@
                     success: function (result) {
                         console.log(result);
                         $("#FlightTimeTable").DataTable().ajax.reload();
+                    },
+                    done: function () {
+                        Util.ShowLoading(false);
                     }
                 })
             });

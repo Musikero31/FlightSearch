@@ -7,7 +7,12 @@
     @Styles.Render("~/Content/css")
 </head>
 <body>
-    <div class="container sticky-top">
+    <div class="d-flex h-100">
+        <div id="Loading" class="fa-3x d-none">
+            <i class="fas fa-cog fa-spin"></i>
+        </div>
+    </div>
+    <div class="container sticky-top" style="z-index: 0">
         <nav class="navbar navbar-expand-sm bg-dark navbar-dark ">
             @Html.ActionLink("Flight Search", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             <ul class="navbar-nav">
@@ -28,7 +33,9 @@
         </nav>
     </div>
     <div class="container body-content">
-        @RenderBody()
+
+        <div>@RenderBody()</div>
+
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
@@ -40,8 +47,9 @@
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/DataTables")
     @Scripts.Render("~/bundles/js");
-<script>
+    <script>
     $(function () {
+
         $("#ChangeLang").val("@Request.Cookies["culture"].Value");
 
         $("#ChangeLang").change(function (e) {
@@ -66,7 +74,7 @@
             });
         });
     });
-</script>
+    </script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

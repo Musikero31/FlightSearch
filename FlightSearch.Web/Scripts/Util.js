@@ -55,6 +55,10 @@
         return date.toDate();
     },
 
+    ShowLoading: function (isShown) {
+        $("#Loading").toggleClass("d-none", !isShown);
+    },
+
     LongDate: function (dateString) {
         let date = moment(dateString).format("DD/MM/YYYY");
         let longDate = moment(date, "DD/MM/YYYY").format("DD MMM YYYY");

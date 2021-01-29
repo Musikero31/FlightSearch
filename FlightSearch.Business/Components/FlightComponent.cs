@@ -82,6 +82,8 @@ namespace FlightSearch.Business.Components
 
         public List<AirlineOne> GetSearchAirlineOne(FlightSearchQuery query)
         {
+            ValidateSearch(query);
+
             List<AirlineOne> result = null;
 
             FlightSearchDataAccess dataAccess = new FlightSearchDataAccess();
@@ -109,6 +111,8 @@ namespace FlightSearch.Business.Components
 
         public AirlineTwo GetSearchAirlineTwo(FlightSearchQuery query)
         {
+            ValidateSearch(query);
+
             AirlineTwo result = null;
 
             FlightSearchDataAccess dataAccess = new FlightSearchDataAccess();
@@ -139,6 +143,29 @@ namespace FlightSearch.Business.Components
             };
 
             return result;
+        }
+
+        private void ValidateSearch(FlightSearchQuery query)
+        {
+            if (query.FromAirport == query.ToAirport)
+            {
+                throw new ArgumentException("Airports cannot be the same", "FromAirport, TwoAirport");
+            }
+
+            if (query.DepartureDate == query.ArrivalDate)
+            {
+                throw new ArgumentException("Departure date and Arrival date cannot be the same", "DepartureDate, ArrivalDate");
+            }
+
+            if (query.DepartureDate > query.ArrivalDate)
+            {
+                throw new ArgumentException("Departure date should be less than Arrival date", "DepartureDate");
+            }
+
+            if (query.ArrivalDate < query.DepartureDate)
+            {
+                throw new ArgumentException("Arrival date should be greater than Departure date", "ArrivalDate");
+            }
         }
     }
 }

@@ -117,6 +117,8 @@
                     return;
                 }
 
+                Util.ShowLoading(true);
+
                 let param = {
                     "FromAirport": $("#FromAirport").val(),
                     "ToAirport": $("#ToAirport").val(),
@@ -159,7 +161,9 @@
                             { targets: 5, data: "TotalAmount" }
                         ]
                     })
-                });                
+                }).done(function () {
+                    Util.ShowLoading(false);
+                })
             });
         });
 
