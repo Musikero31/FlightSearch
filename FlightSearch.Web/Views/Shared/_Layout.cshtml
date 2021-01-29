@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using FlightSearch.Web.Configuration
+@using FlightSearch.Web.Resources
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -12,18 +14,17 @@
             <i class="fas fa-cog fa-spin"></i>
         </div>
     </div>
-    <div class="container sticky-top" style="z-index: 0">
+    <div class="container" style="z-index: 0">
         <nav class="navbar navbar-expand-sm bg-dark navbar-dark ">
             @Html.ActionLink("Flight Search", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             <ul class="navbar-nav">
                 <li class="nav-item">@Html.ActionLink("Home", "Index", "Home", new { @class = "nav-link" })</li>
-                <li class="nav-item">@Html.ActionLink("Load Data", "LoadData", "Home", new { @class = "nav-link" })</li>
-                <li class="nav-item">@Html.ActionLink("Search Flights", "AirlineSearch", "Home", new { @class = "nav-link" })</li>
+                <li class="nav-item">@Html.ActionLink(Resource.LoadData, "LoadData", "Home", new { @class = "nav-link" })</li>
             </ul>
             <div class="float-right">
                 <select class="form-control" id="ChangeLang">
                     @{
-                        foreach (var lang in FlightSearch.Web.Configuration.LanguageManager.Languages)
+                        foreach (var lang in LanguageManager.Languages)
                         {
                             <option value="@lang.CultureCode">@lang.Name</option>
                         }
@@ -46,7 +47,7 @@
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/DataTables")
-    @Scripts.Render("~/bundles/js");
+    @Scripts.Render("~/bundles/js")
     <script>
     $(function () {
 

@@ -10,19 +10,14 @@ namespace FlightSearch.Web.Controllers
 {
     public class HomeController : BaseController
     {
-        public ActionResult Index()
-        {
-            return View();
-        }
-        
-        public async Task<ActionResult> LoadData()
+        public async Task<ActionResult> Index()
         {
             await PopulateReferences();
 
             return View();
         }
-
-        public async Task<ActionResult> AirlineSearch()
+        
+        public async Task<ActionResult> LoadData()
         {
             await PopulateReferences();
 
@@ -61,14 +56,7 @@ namespace FlightSearch.Web.Controllers
 
             return Json(true);
         }
-
-        //[HttpPost]
-        //public ActionResult ChangeLanguage(string lang)
-        //{
-        //    new LanguageManager().SetLanguage(lang);
-        //    return RedirectToAction("Index", "Home");
-        //}
-
+                
         private async Task PopulateReferences()
         {
             ReferenceComponent refComp = new ReferenceComponent();

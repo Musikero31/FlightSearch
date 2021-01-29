@@ -79,11 +79,74 @@ namespace FlightSearch.Web.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please select airline.
+        /// </summary>
+        public static string AirlineRequired {
+            get {
+                return ResourceManager.GetString("AirlineRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Airline Search .
+        /// </summary>
+        public static string AirlineSearch {
+            get {
+                return ResourceManager.GetString("AirlineSearch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please select airport.
+        /// </summary>
+        public static string AirportRequired {
+            get {
+                return ResourceManager.GetString("AirportRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Airports cannot be the same.
+        /// </summary>
+        public static string AirportValidation {
+            get {
+                return ResourceManager.GetString("AirportValidation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Clear.
         /// </summary>
         public static string Clear {
             get {
                 return ResourceManager.GetString("Clear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter date.
+        /// </summary>
+        public static string DateRequired {
+            get {
+                return ResourceManager.GetString("DateRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End date should be greater than start date.
+        /// </summary>
+        public static string EndDateValidation {
+            get {
+                return ResourceManager.GetString("EndDateValidation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Flight Date.
+        /// </summary>
+        public static string FlightDate {
+            get {
+                return ResourceManager.GetString("FlightDate", resourceCulture);
             }
         }
         
@@ -115,6 +178,15 @@ namespace FlightSearch.Web.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Load Data.
+        /// </summary>
+        public static string LoadData {
+            get {
+                return ResourceManager.GetString("LoadData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Outbound Flight Duration.
         /// </summary>
         public static string OutboundFlightDuration {
@@ -124,11 +196,38 @@ namespace FlightSearch.Web.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please select.
+        /// </summary>
+        public static string PleaseSelect {
+            get {
+                return ResourceManager.GetString("PleaseSelect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Process Dates.
+        /// </summary>
+        public static string ProcessDates {
+            get {
+                return ResourceManager.GetString("ProcessDates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Search.
         /// </summary>
         public static string Search {
             get {
                 return ResourceManager.GetString("Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start date should be less than end date.
+        /// </summary>
+        public static string StartDateValidation {
+            get {
+                return ResourceManager.GetString("StartDateValidation", resourceCulture);
             }
         }
         

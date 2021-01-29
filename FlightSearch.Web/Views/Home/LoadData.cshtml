@@ -1,40 +1,42 @@
 ﻿@using FlightSearch.Web.Models
+@using FlightSearch.Web.Resources
 @{
-    ViewBag.Title = "LoadData";
+    ViewBag.Title = Resource.LoadData;
     var airlines = (List<AirlineViewModel>)ViewData["Airlines"];
 }
 
 <div class="row">
     <div class="col-12">
-        @*<div class="col-1"><i class="fa fa-calendar"></i></div>
-        <div class="col-11"><h3>Load Data</h3></div>*@
-        <h3><i class="fa fa-database"></i> Load Data</h3>
+        <h3><i class="fa fa-database"></i> @Resource.LoadData</h3>
     </div>
-    @*<div class="col-12">
-        <div class="header-icon">
-            <i class="fa fa-plane-departure"></i>
-        </div>
-        <div class="header-title">
-            <h1>Load Data</h1>
-        </div>
-    </div>*@
+
 </div>
 <div class="row">
     <div class="col-12">
         <form id="LoadDataForm">
             <div class="form-row">
                 <div class="form-group col-4">
-                    <label for="FromDate" class="control-label">From Date</label>
-                    <input type="text" class="form-control enter-date" id="FromDate">
+                    <label for="FromDate" class="control-label">@Resource.FromDate</label>
+                    <div class="input-group date" data-date-format="dd-mm-yyyy">
+                        <input id="FromDate" class="form-control" placeholder="dd/mm/yyyy">
+                        <div class="input-group-append">
+                            <label class="input-group-text" for="FromDate"><i class="fa fa-calendar-alt"></i></label>
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group col-4">
-                    <label for="ToDate" class="control-label">To Date</label>
-                    <input type="text" class="form-control enter-date" id="ToDate">
+                    <label for="ToDate" class="control-label">@Resource.ToDate</label>
+                    <div class="input-group date" data-date-format="dd-mm-yyyy">
+                        <input id="ToDate" class="form-control" placeholder="dd/mm/yyyy">
+                        <div class="input-group-append">
+                            <label class="input-group-text" for="ToDate"><i class="fa fa-calendar-alt"></i></label>
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group col-4">
-                    <label for="Airline">State</label>
+                    <label for="Airline">@Resource.AirlineName</label>
                     <select id="Airline" class="form-control">
-                        <option disabled>Choose...</option>
+                        <option disabled selected>@Resource.PleaseSelect</option>
                         @{
                             foreach (var item in airlines)
                             {
@@ -46,7 +48,7 @@
             </div>
             <div class="form-row">
                 <div class="form-group col-3 align-text-bottom">
-                    <button id="Process" class="btn btn-outline-success">Process Dates</button>
+                    <button id="Process" class="btn btn-outline-success">@Resource.ProcessDates</button>
                 </div>
             </div>
         </form>
@@ -56,10 +58,10 @@
     <table id="FlightTimeTable" class="table table-bordered table-responsive table-striped data-table">
         <thead>
             <tr>
-                <th>Airline</th>
-                <th>Flight Date</th>
-                <th>From Airport</th>
-                <th>To Airport</th>
+                <th>@Resource.AirlineName</th>
+                <th>@Resource.FlightDate</th>
+                <th>@Resource.FromAirport</th>
+                <th>@Resource.ToDate</th>
             </tr>
         </thead>
     </table>
@@ -68,13 +70,25 @@
 @section Scripts{
     <script>
         $(function () {
-            $(".enter-date").datepicker({
+            $(".date input").datepicker({
                 format: "dd/mm/yyyy",
                 autoclose: true
             });
 
+            $("#LoadDataForm input, #LoadDataForm select").each(function (index, obj) {
+                let name = $(obj).attr("id");
+                $(obj).attr("name", name);
+            });
+
+            Util.initFormValidator("#LoadDataForm", ValidationRules());
+            CustomValidations();
+
             $("#Process").click(function (e) {
                 e.preventDefault();
+
+                if (!$("#LoadDataForm").valid()) {
+                    return;
+                }
 
                 Util.ShowLoading(true);
 
@@ -103,8 +117,9 @@
                 })
             });
 
-            $("#FlightTimeTable").DataTable().clear().destroy();
             $("#FlightTimeTable").DataTable({
+                destroy: true,
+                language: LangLabel[$("#ChangeLang").val()],
                 autoWidth: false,
                 ajax: {
                     url: "@Url.Action("GetTimeTable", "FlightSearch", new { httproute = "DefaultApi" })",
@@ -127,5 +142,52 @@
                 ]
             });
         });
+
+        function ValidationRules() {
+            return {
+                rules: {
+                    "FromDate": {
+                        required: true,
+                        startdate: true
+                    },
+                    "ToDate": {
+                        required: true,
+                        enddate: true
+                    },
+                    "Airline": {
+                        required: true
+                    }
+                },
+                messages: {
+                    "FromDate": {
+                        required: "@Resource.DateRequired"
+                    },
+                    "ToDate": {
+                        required: "@Resource.DateRequired"
+                    },
+                    "Airline": {
+                        required: "@Resource.AirlineRequired"
+                    }
+                }
+            };
+        }
+
+        function CustomValidations() {
+            $.validator.addMethod("startdate", function (value, element) {
+                console.log("Start date to validate", value);
+                let endDate = $("#ToDate").val();
+                let isValid = moment(Util.Date(value, "DD/MM/YYYY")).isBefore(Util.Date(endDate, "DD/MM/YYYY"));
+
+                return isValid;
+            }, "@Resource.StartDateValidation");
+
+            $.validator.addMethod("enddate", function (value, element) {
+                console.log("End date to validate", value);
+                let startDate = $("#FromDate").val();
+                let isValid = moment(Util.Date(value, "DD/MM/YYYY")).isAfter(Util.Date(startDate, "DD/MM/YYYY"));
+
+                return isValid;
+            }, "@Resource.EndDateValidation");
+        }
     </script>
 }

@@ -26,6 +26,7 @@ namespace FlightSearch.Web
                 "~/Scripts/moment/moment.js",
                 "~/Scripts/Bootstrap-Datepicker/bootstrap-datepicker.js",
                 "~/Scripts/font-awesome/js/fontawesome.js",
+                "~/Scripts/DataTables/LanguageLabels.js",
                 "~/Scripts/Util.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(

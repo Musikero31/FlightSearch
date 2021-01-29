@@ -124,8 +124,7 @@
         $(formId).validate({
             rules: valRules,
             messages: valMessages,
-            //ignore: ":hidden",
-            ignore: [],
+            ignore: ":hidden",
             highlight: function (element, errorClass) {
                 if ($(element).siblings("span").hasClass("select2")) {
                     $(element).removeClass("error");

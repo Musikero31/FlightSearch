@@ -106,6 +106,8 @@ namespace FlightSearch.Business.Components
                           TotalAmount = Convert.ToDecimal(row["Amount"])
                       }).ToList();
 
+            _log.Info($"Retrieved result for AirlineOne : {JsonConvert.SerializeObject(result)}");
+
             return result;
         }
 
@@ -141,6 +143,8 @@ namespace FlightSearch.Business.Components
                 CarrierCodes = new List<string>(carrierCodes),
                 Results = new List<AirlineOne>(innerResult)
             };
+
+            _log.Info($"Retrieved result for AirlineTwo : {JsonConvert.SerializeObject(result)}");
 
             return result;
         }

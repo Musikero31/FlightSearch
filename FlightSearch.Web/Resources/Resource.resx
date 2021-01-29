@@ -123,8 +123,29 @@
   <data name="AirlineName" xml:space="preserve">
     <value>Airline Name</value>
   </data>
+  <data name="AirlineRequired" xml:space="preserve">
+    <value>Please select airline</value>
+  </data>
+  <data name="AirlineSearch" xml:space="preserve">
+    <value>Airline Search </value>
+  </data>
+  <data name="AirportRequired" xml:space="preserve">
+    <value>Please select airport</value>
+  </data>
+  <data name="AirportValidation" xml:space="preserve">
+    <value>Airports cannot be the same</value>
+  </data>
   <data name="Clear" xml:space="preserve">
     <value>Clear</value>
+  </data>
+  <data name="DateRequired" xml:space="preserve">
+    <value>Please enter date</value>
+  </data>
+  <data name="EndDateValidation" xml:space="preserve">
+    <value>End date should be greater than start date</value>
+  </data>
+  <data name="FlightDate" xml:space="preserve">
+    <value>Flight Date</value>
   </data>
   <data name="FromAirport" xml:space="preserve">
     <value>Flying From</value>
@@ -135,11 +156,23 @@
   <data name="InboundFlightDuration" xml:space="preserve">
     <value>Inbound Flight Duration</value>
   </data>
+  <data name="LoadData" xml:space="preserve">
+    <value>Load Data</value>
+  </data>
   <data name="OutboundFlightDuration" xml:space="preserve">
     <value>Outbound Flight Duration</value>
   </data>
+  <data name="PleaseSelect" xml:space="preserve">
+    <value>Please select</value>
+  </data>
+  <data name="ProcessDates" xml:space="preserve">
+    <value>Process Dates</value>
+  </data>
   <data name="Search" xml:space="preserve">
     <value>Search</value>
+  </data>
+  <data name="StartDateValidation" xml:space="preserve">
+    <value>Start date should be less than end date</value>
   </data>
   <data name="Stops" xml:space="preserve">
     <value>Stops</value>

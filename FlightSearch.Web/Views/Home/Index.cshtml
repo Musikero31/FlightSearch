@@ -1,31 +1,240 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@model FlightSearch.Web.Models.QueryViewModel
+@using FlightSearch.Web.Resources
+@using FlightSearch.Web.Models
+@{
+    ViewBag.Title = Resource.AirlineSearch;
+    var airports = (List<AirportViewModel>)ViewData["Airports"];
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
-
 <div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header">@ViewBag.Title</div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12">
+                        <form id="SearchForm">
+                            <div class="form-row">
+                                <div class="form-group col-3">
+                                    @Html.LabelFor(model => model.FromAirport)
+                                    <select id="FromAirport" class="form-control airport">
+                                        <option disabled selected value="">@Resource.PleaseSelect</option>
+                                        @{
+                                            foreach (var item in airports)
+                                            {
+                                                <option value="@item.Code">@item.Name</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                                <div class="form-group col-3">
+                                    @Html.LabelFor(model => model.ToAirport)
+                                    <select id="ToAirport" class="form-control airport">
+                                        <option disabled selected value="">@Resource.PleaseSelect</option>
+                                        @{
+                                            foreach (var item in airports)
+                                            {
+                                                <option value="@item.Code">@item.Name</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                                <div class="form-group col-3">
+                                    @Html.LabelFor(model => model.DepartureDate)
+                                    <div class="input-group date" data-date-format="dd-mm-yyyy">
+                                        <input id="FromDate" class="form-control" placeholder="dd/mm/yyyy">
+                                        <div class="input-group-append">
+                                            <label class="input-group-text" for="FromDate"><i class="fa fa-calendar-alt"></i></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-3">
+                                    @Html.LabelFor(model => model.ArrivalDate)
+                                    <div class="input-group date" data-date-format="dd-mm-yyyy">
+                                        <input id="ToDate" class="form-control" placeholder="dd/mm/yyyy">
+                                        <div class="input-group-append">
+                                            <label class="input-group-text" for="ToDate"><i class="fa fa-calendar-alt"></i></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-3">
+                                    <button class="btn btn-outline-success" id="Search">@Resource.Search</button>
+                                    <button class="btn btn-outline-dark" id="Clear">@Resource.Clear</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="row">
+                    <table id="ResultTable" class="table table-bordered table-responsive table-striped data-table">
+                        <thead>
+                            <tr>
+                                <th>@Resource.AirlineLogo</th>
+                                <th>@Resource.AirlineName</th>
+                                <th>@Resource.InboundFlightDuration</th>
+                                <th>@Resource.OutboundFlightDuration</th>
+                                <th>@Resource.Stops</th>
+                                <th>@Resource.TotalAmount</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+@section Scripts {
+    <script>
+        $(function () {
+            $(".date input").datepicker({
+                format: "dd/mm/yyyy",
+                autoclose: true
+            });
+
+            $("#SearchForm input, #SearchForm select").each(function (index, obj) {
+                let name = $(obj).attr("id");
+                $(obj).attr("name", name);
+            });
+
+            Util.initFormValidator("#SearchForm", ValidationRules());
+            CustomValidations();
+
+            $("#ResultTable").DataTable({
+                language: LangLabel[$("#ChangeLang").val()]
+            });
+
+            $("#Clear").click(function (e) {
+                e.preventDefault();
+
+                $(".airport").get(0).selectedIndex = 0;
+                $("#FromDate, #ToDate").val("");
+                $("#ResultTable").DataTable().clear().destroy();
+                $("#ResultTable").DataTable({
+                    language: LangLabel[$("#ChangeLang").val()]
+                });
+            })
+
+            $("#Search").click(function (e) {
+                e.preventDefault();
+
+                if (!$("#SearchForm").valid()) {
+                    return;
+                }
+
+                Util.ShowLoading(true);
+                let param = {
+                    "FromAirport": $("#FromAirport").val(),
+                    "ToAirport": $("#ToAirport").val(),
+                    "DepartureDate": Util.JSONDate($("#FromDate").val(), "DD/MM/YYYY"),
+                    "ArrivalDate": Util.JSONDate($("#ToDate").val(), "DD/MM/YYYY")
+                };
+
+                $.get("@Url.Action("AirlineOne", "FlightSearch", new { httproute = "DefaultApi" })", param, function (result) {
+                    console.log("Retrieved data", result);
+
+                    $("#ResultTable").DataTable({
+                        destroy: true,
+                        data: result,
+                        language: LangLabel[$("#ChangeLang").val()],
+                        columnDefs: [
+                            {
+                                targets: 0,
+                                data: "AirlineLogoAddress",
+                                searchable: false,
+                                orderable: false,
+                                render: function (data) {
+                                    return `<img src="${data}" width="50" height="60">`;
+                                }
+                            },
+                            {
+                                targets: 5,
+                                data: "TotalAmount",
+                                searchable: false,
+                                orderable: true,
+                                render: function (data) {
+                                    return "USD " + Util.formatMoney(data);
+                                }
+                            }
+                        ],
+                        columns: [
+                            { targets: 0, data: "AirlineLogoAddress" },
+                            { targets: 1, data: "AirlineName" },
+                            { targets: 2, data: "InboundFlightDuration" },
+                            { targets: 3, data: "OutboundFlightDuration" },
+                            { targets: 4, data: "Stops" },
+                            { targets: 5, data: "TotalAmount" }
+                        ]
+                    })
+                }).done(function () {
+                    Util.ShowLoading(false);
+                })
+            });
+        });
+
+        function ValidationRules() {
+            return {
+                rules: {
+                    "FromAirport": {
+                        required: true,
+                        airports: true
+                    },
+                    "ToAirport": {
+                        required: true,
+                        airports: true
+                    },
+                    "FromDate": {
+                        required: true,
+                        startdate: true
+                    },
+                    "ToDate": {
+                        required: true,
+                        enddate: true
+                    }
+                },
+                messages: {
+                    "FromAirport": {
+                        required: "@Resource.AirportRequired"
+                    },
+                    "ToAirport": {
+                        required: "@Resource.AirportRequired"
+                    },
+                    "FromDate": {
+                        required: "@Resource.DateRequired"
+                    },
+                    "ToDate": {
+                        required: "@Resource.DateRequired"
+                    }
+                }
+            };
+        }
+
+        function CustomValidations() {
+            $.validator.addMethod("startdate", function (value, element) {
+                console.log("Start date to validate", value);
+                let endDate = $("#ToDate").val();
+                let isValid = moment(Util.Date(value, "DD/MM/YYYY")).isBefore(Util.Date(endDate, "DD/MM/YYYY"));
+
+                return isValid;
+            }, "@Resource.StartDateValidation");
+
+            $.validator.addMethod("enddate", function (value, element) {
+                console.log("End date to validate", value);
+                let startDate = $("#FromDate").val();
+                let isValid = moment(Util.Date(value, "DD/MM/YYYY")).isAfter(Util.Date(startDate, "DD/MM/YYYY"));
+
+                return isValid;
+            }, "@Resource.EndDateValidation");
+
+            $.validator.addMethod("airports", function (value, element) {
+                let values = [];
+                $(".airport").each(function (index, obj) {
+                    values.push($(obj).val());
+                });
+
+                return values[0] !== values[1];
+            }, "@Resource.AirportValidation")
+        }
+    </script>
+}
