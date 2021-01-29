@@ -109,10 +109,9 @@
                     contentType: "application/json",
                     success: function (result) {
                         console.log(result);
-                        $("#FlightTimeTable").DataTable().ajax.reload();
-                    },
-                    done: function () {
-                        Util.ShowLoading(false);
+                        $("#FlightTimeTable").DataTable().ajax.reload(function () {
+                            Util.ShowLoading(false);
+                        });
                     }
                 })
             });

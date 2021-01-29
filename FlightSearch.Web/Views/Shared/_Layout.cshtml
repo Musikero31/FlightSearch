@@ -15,23 +15,26 @@
         </div>
     </div>
     <div class="container" style="z-index: 0">
-        <nav class="navbar navbar-expand-sm bg-dark navbar-dark ">
-            @Html.ActionLink("Flight Search", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            <ul class="navbar-nav">
+        <div class="justify-content-between navbar navbar-expand bg-dark navbar-dark">
+            <div class="navbar-brand">
+                @Html.ActionLink("Flight Search", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })                
+            </div>
+            
+            <ul class="nav justify-content-end">
                 <li class="nav-item">@Html.ActionLink("Home", "Index", "Home", new { @class = "nav-link" })</li>
                 <li class="nav-item">@Html.ActionLink(Resource.LoadData, "LoadData", "Home", new { @class = "nav-link" })</li>
-            </ul>
-            <div class="float-right">
-                <select class="form-control" id="ChangeLang">
-                    @{
-                        foreach (var lang in LanguageManager.Languages)
-                        {
-                            <option value="@lang.CultureCode">@lang.Name</option>
+                <li class="nav-item">
+                    <select class="form-control" id="ChangeLang">
+                        @{
+                            foreach (var lang in LanguageManager.Languages)
+                            {
+                                <option value="@lang.CultureCode">@lang.Name</option>
+                            }
                         }
-                    }
-                </select>
-            </div>
-        </nav>
+                    </select>
+                </li>
+            </ul>
+        </div>
     </div>
     <div class="container body-content">
 

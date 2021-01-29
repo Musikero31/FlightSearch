@@ -57,3 +57,13 @@ label.error {
 #Loading i {
     margin-top: 20%
 }
+
+li.nav-item a.nav-link {
+    color: #d8d8d8;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+li.nav-item a.nav-link:hover {
+    color: #FFFFFF;    
+}
