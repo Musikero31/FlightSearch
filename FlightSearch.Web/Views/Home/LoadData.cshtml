@@ -49,6 +49,7 @@
             <div class="form-row">
                 <div class="form-group col-3 align-text-bottom">
                     <button id="Process" class="btn btn-outline-success">@Resource.ProcessDates</button>
+                    <button id="ClearData" class="btn btn-outline-warning">@Resource.ClearData</button>
                 </div>
             </div>
         </form>
@@ -139,6 +140,24 @@
                     { targets: 2, data: "FromAirport" },
                     { targets: 3, data: "ToAirport" }
                 ]
+            });
+
+            $("#ClearData").click(function (e) {
+                e.preventDefault();
+
+                Util.confirmAction("Load Data", "Are you sure you want to clear the TimeTables?", function (isOK) {
+                    if (isOK) {
+                        Util.ShowLoading(true);
+                        $.post("@Url.Action("ClearTimeTables", "FlightSearch", new { httproute = "DefaultApi" })", null, function () {
+                            Util.alert("Load Data", "Time Tables have been cleared and reseeded", false);
+
+                            $("#FlightTimeTable").DataTable().ajax.reload(function () {
+                                Util.ShowLoading(false);
+                            });
+                        });
+                    }
+                })
+
             });
         });
 

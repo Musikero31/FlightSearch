@@ -65,7 +65,6 @@
   <ItemGroup>
     <Compile Include="DataAccess\AirlineDataAccess.cs" />
     <Compile Include="DataAccess\AirportDataAccess.cs" />
-    <Compile Include="DataAccess\FlightSearchDataAccess.cs" />
     <Compile Include="DataAccess\ScheduleDataAccess.cs" />
     <Compile Include="DataAccess\TimeTableDataAccess.cs" />
     <Compile Include="EF\Entities\Airlines.cs" />

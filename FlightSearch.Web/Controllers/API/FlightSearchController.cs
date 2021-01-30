@@ -45,5 +45,14 @@ namespace FlightSearch.Web.Controllers.API
             new LanguageManager().SetLanguage(lang);
             return Ok(true);
         }
+
+        [HttpPost]
+        public IHttpActionResult ClearTimeTables()
+        {
+            FlightComponent component = new FlightComponent();
+            component.ClearTimeTables();
+
+            return Ok(true);
+        }
     }
 }

@@ -124,6 +124,15 @@ namespace FlightSearch.Web.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Clear data.
+        /// </summary>
+        public static string ClearData {
+            get {
+                return ResourceManager.GetString("ClearData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please enter date.
         /// </summary>
         public static string DateRequired {

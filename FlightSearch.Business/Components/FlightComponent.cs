@@ -86,7 +86,7 @@ namespace FlightSearch.Business.Components
 
             List<AirlineOne> result = null;
 
-            FlightSearchDataAccess dataAccess = new FlightSearchDataAccess();
+            TimeTableDataAccess dataAccess = new TimeTableDataAccess();
             var data = dataAccess.GetData(query.FromAirport, query.ToAirport, query.DepartureDate, query.ArrivalDate);
             if (data == null)
             {
@@ -117,8 +117,9 @@ namespace FlightSearch.Business.Components
 
             AirlineTwo result = null;
 
-            FlightSearchDataAccess dataAccess = new FlightSearchDataAccess();
+            TimeTableDataAccess dataAccess = new TimeTableDataAccess();
             var data = dataAccess.GetData(query.FromAirport, query.ToAirport, query.DepartureDate, query.ArrivalDate);
+            
             if (data == null)
             {
                 return result;
@@ -147,6 +148,12 @@ namespace FlightSearch.Business.Components
             _log.Info($"Retrieved result for AirlineTwo : {JsonConvert.SerializeObject(result)}");
 
             return result;
+        }
+
+        public void ClearTimeTables()
+        {
+            TimeTableDataAccess dataAccess = new TimeTableDataAccess();
+            dataAccess.ResetTimeTables();
         }
 
         private void ValidateSearch(FlightSearchQuery query)

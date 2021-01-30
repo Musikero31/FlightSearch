@@ -17,9 +17,9 @@
     <div class="container" style="z-index: 0">
         <div class="justify-content-between navbar navbar-expand bg-dark navbar-dark">
             <div class="navbar-brand">
-                @Html.ActionLink("Flight Search", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })                
+                @Html.ActionLink("Flight Search", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
-            
+
             <ul class="nav justify-content-end">
                 <li class="nav-item">@Html.ActionLink("Home", "Index", "Home", new { @class = "nav-link" })</li>
                 <li class="nav-item">@Html.ActionLink(Resource.LoadData, "LoadData", "Home", new { @class = "nav-link" })</li>
@@ -45,6 +45,49 @@
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>
     </div>
+    
+    <div class="modal fade" id="confirmModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 id="confirmTitle"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <i class="fa fa-times-circle"></i>
+                    </button>
+                </div>
+                <div id="confirmBody" class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <div class="pull-right">
+                        <button class="btn btn-primary" data-dismiss="modal" id="btnConfirmYes">Yes</button>
+                        <button class="btn btn-primary" data-dismiss="modal" id="btnConfirmNo">No</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="commonModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times-circle"></i></button>
+                    <div><strong id="ModalTitle" class="modal-title"></strong></div>
+                </div>
+                <div id="ModalBody" class="modal-body" style="overflow-wrap:break-word;">
+
+                </div>
+                <div class="modal-footer">
+                    <div class="pull-right">
+                        <button class="btn btn-primary" data-dismiss="modal">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
