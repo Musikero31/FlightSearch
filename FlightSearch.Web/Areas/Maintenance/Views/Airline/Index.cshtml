@@ -34,8 +34,7 @@
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group">
-                                            <button class="btn btn-outline-success" id="Search">@Resource.Search</button>
-                                            <button class="btn btn-outline-dark" id="Clear">@Resource.Clear</button>
+                                            <button class="btn btn-outline-success" id="Save">Save</button>
                                         </div>
                                     </div>
                                 </form>
@@ -64,7 +63,55 @@
 @section Scripts {
     <script>
         $(function () {
-            $("#AirlineResultTable").DataTable();
-        })
+            LoadAirlines();
+            Util.initFormValidator("#AirlineForm", ValidationRules());
+        });
+
+        function LoadAirlines() {
+            $.get("@Url.Action("Get", "AirlineAPI", new { httproute = "DefaultApi", Area = "" })", null, function (result) {
+                console.log("Retrieved airlines", result);
+
+                $("#AirlineResultTable").DataTable({
+                    destroy: true,
+                    data: result,
+                    columnDefs: [
+                        {
+                            targets: 1,
+                            data: "LogoUrl",
+                            searchable: false,
+                            orderable: false,
+                            render: function (data) {
+                                return `<img src="${data}" width="70" height="60">`
+                            }
+                        },
+                        {
+                            targets: 0,
+                            data: "ID",
+                            searchable: false,
+                            orderable: false,
+                            render: function () {
+                                return "";
+                            }
+                        }
+                    ],
+                    columns: [
+                        { targets: 0, data: "ID" },
+                        { targets: 1, data: "LogoUrl" },
+                        { targets: 2, data: "AirlineName" },
+                        { targets: 3, data: "CarrierCode" }
+                    ]
+                });
+            });
+
+        }
+
+        function ValidationRules() {
+            return {
+                rules: {
+                    "AirlineName": { required: true },
+                    "CarrierCode": { required: true }
+                }
+            };
+        }
     </script>
 }
