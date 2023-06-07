@@ -46,7 +46,7 @@
                             <table id="AirlineResultTable" class="table table-bordered table-responsive table-striped data-table">
                                 <thead>
                                     <tr>
-                                        <th>SEL</th>
+                                        <th></th>
                                         <th>@Resource.AirlineLogo</th>
                                         <th>@Resource.AirlineName</th>
                                         <th>Carrier Code</th>
@@ -65,6 +65,7 @@
         $(function () {
             LoadAirlines();
             Util.initFormValidator("#AirlineForm", ValidationRules());
+            $("#Save").click(SaveRecord);
         });
 
         function LoadAirlines() {
@@ -89,8 +90,12 @@
                             data: "ID",
                             searchable: false,
                             orderable: false,
-                            render: function () {
-                                return "";
+                            width: "75px",
+                            render: function (data) {
+                                return `<div class="btn-group" role="group">
+                                        <button class="btn btn-outline-secondary edit-row" rowID="${data}"><i class="fa fa-edit"></i></button>
+                                        <button class="btn btn-outline-secondary delete-row" rowID="${data}"><i class="fa fa-trash-alt"></i></button>
+                                </div>`;
                             }
                         }
                     ],
@@ -101,8 +106,86 @@
                         { targets: 3, data: "CarrierCode" }
                     ]
                 });
-            });
 
+                $("#AirlineResultTable tbody").on("click", ".edit-row", EditRow);
+
+                $("#AirlineResultTable tbody").on("click", ".delete-row", DeleteRow);
+            });
+        }
+
+        function SaveRecord(e) {
+            e.preventDefault();
+
+            if (!$("#AirlineForm").valid()) {
+                return;
+            }
+
+            let id = $("#ID").val();
+
+            //let verb = id === "" ? "POST" : "PUT";
+            let verb = "";
+            let url = "";
+
+            if (id === "") {
+                verb = "POST";
+                url = "@Url.Action("Post", "AirlineAPI", new { httproute = "DefaultApi", Area = "" })"
+            }
+            else {
+                verb = "PUT";
+                url = "@Url.Action("Put", "AirlineAPI", new { httproute = "DefaultApi", Area = "" })"
+            }
+
+            let isActive = $("#IsActive").val() === "true";
+
+            let data = {
+                ID: parseInt(id),
+                AirlineName: $("#AirlineName").val(),
+                CarrierCode: $("#CarrierCode").val(),
+                LogoUrl: $("#LogoURL").val(),
+                IsActive: isActive
+            };
+
+            $.ajax({
+                type: verb,
+                url: url,
+                data: data,
+                dataType: "json",
+                success: function () {
+                    LoadAirlines();
+
+                    $("#AirlineName").val("");
+                    $("#CarrierCode").val("");
+                    $("#LogoURL").val("");
+                    $("#ID").val("");
+                    $("#IsActive").val("");
+                }
+            });
+        }
+
+        function EditRow() {
+            let val = $(this).attr("rowID");
+            console.log("Value ID " + val);
+
+            $.ajax({
+                type: "GET",
+                url: "@Url.Action("Get", "AirlineAPI", new { httproute = "DefaultApi", Area = "" })",
+                data: { id: val },
+                dataType: "json",
+                success: function (result) {
+                    console.log("Result", result);
+
+                    $("#AirlineName").val(result.AirlineName);
+                    $("#CarrierCode").val(result.CarrierCode);
+                    $("#LogoURL").val(result.LogoUrl);
+                    $("#ID").val(result.ID);
+                    $("#IsActive").val(result.IsActive);
+                }
+            });
+        }
+
+        function DeleteRow() {
+            let val = $(this).attr("rowID");
+            console.log("Value ID " + val);
         }
 
         function ValidationRules() {

@@ -1,11 +1,9 @@
 ﻿using FlightSearch.Business.Components.Maintenance;
+using FlightSearch.Business.Entities;
 using FlightSearch.Web.Configuration;
 using FlightSearch.Web.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace FlightSearch.Web.Controllers.API
@@ -24,19 +22,27 @@ namespace FlightSearch.Web.Controllers.API
         }
 
         // GET api/<controller>/5
-        public string Get(int id)
+        public AirlineViewModel Get(int id)
         {
-            return "value";
+            var result = _component.GetAirlineById(id);
+
+            return WebMapper.Mapper.Map<AirlineViewModel>(result);
         }
 
         // POST api/<controller>
-        public void Post([FromBody] string value)
+        public void Post([FromBody] AirlineViewModel value)
         {
+            var data = WebMapper.Mapper.Map<AirlineEntity>(value);
+
+            _component.CreateNewArline(data);
         }
 
         // PUT api/<controller>/5
-        public void Put(int id, [FromBody] string value)
+        public void Put([FromBody] AirlineViewModel value)
         {
+            var data = WebMapper.Mapper.Map<AirlineEntity>(value);
+
+            _component.UpdateAirline(data);
         }
 
         // DELETE api/<controller>/5

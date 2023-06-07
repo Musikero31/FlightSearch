@@ -3,11 +3,8 @@ using FlightSearch.Business.Utilities;
 using FlightSearch.Data.DataAccess.UnitOfWork;
 using FlightSearch.Data.EF.Entities;
 using NLog;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FlightSearch.Business.Components.Maintenance
 {
@@ -19,6 +16,8 @@ namespace FlightSearch.Business.Components.Maintenance
         public void CreateNewArline(AirlineEntity airline)
         {
             Airlines data = GenericHelper.BusinessMapper.Map<Airlines>(airline);
+            data.IsActive = true;
+
             _airlineWork.AirlineRepo.Insert(data);
             _airlineWork.Save();
 
