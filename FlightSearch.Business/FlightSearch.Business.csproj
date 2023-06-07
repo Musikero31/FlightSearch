@@ -55,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\Maintenance\AirlineComponent.cs" />
     <Compile Include="Components\ReferenceComponent.cs" />
     <Compile Include="Components\FlightComponent.cs" />
     <Compile Include="Configuration\DataBusinessProfile.cs" />

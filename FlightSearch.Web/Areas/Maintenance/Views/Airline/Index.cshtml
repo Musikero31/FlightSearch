@@ -1,0 +1,70 @@
+﻿@model FlightSearch.Web.Models.QueryViewModel
+@using FlightSearch.Web.Resources
+@using FlightSearch.Web.Models
+@{
+    ViewBag.Title = Resource.AirlineMaintenance;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header">@ViewBag.Title</div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6">
+                        <div id="Entry" class="row">
+                            <div class="col-12">
+                                <form id="AirlineForm">
+                                    <div class="form-group">
+                                        <label for="AirlineName">Airline Name</label>
+                                        <input id="AirlineName" class="form-control col-12" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="CarrierCode">Carrier code</label>
+                                        <input id="CarrierCode" class="form-control col-12" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="LogoURL">Logo URL</label>
+                                        <input id="LogoURL" class="form-control col-12" />
+                                    </div>
+                                    <div id="OtherFields">
+                                        <input id="ID" type="hidden" />
+                                        <input id="IsActive" type="hidden" />
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <button class="btn btn-outline-success" id="Search">@Resource.Search</button>
+                                            <button class="btn btn-outline-dark" id="Clear">@Resource.Clear</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div id="Result" class="row">
+                            <table id="AirlineResultTable" class="table table-bordered table-responsive table-striped data-table">
+                                <thead>
+                                    <tr>
+                                        <th>SEL</th>
+                                        <th>@Resource.AirlineLogo</th>
+                                        <th>@Resource.AirlineName</th>
+                                        <th>Carrier Code</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script>
+        $(function () {
+            $("#AirlineResultTable").DataTable();
+        })
+    </script>
+}

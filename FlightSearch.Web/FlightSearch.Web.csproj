@@ -146,6 +146,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Maintenance\Controllers\AirlineController.cs" />
+    <Compile Include="Areas\Maintenance\MaintenanceAreaRegistration.cs" />
     <Compile Include="Configuration\BusinessWebProfile.cs" />
     <Compile Include="Configuration\LanguageManager.cs" />
     <Compile Include="Configuration\WebMapper.cs" />
@@ -429,6 +431,8 @@
     <Content Include="Content\font-awesome\webfonts\fa-solid-900.ttf" />
     <Content Include="Content\font-awesome\webfonts\fa-solid-900.woff" />
     <Content Include="Content\font-awesome\webfonts\fa-solid-900.woff2" />
+    <Content Include="Areas\Maintenance\Views\web.config" />
+    <Content Include="Areas\Maintenance\Views\Airline\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
@@ -706,6 +710,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Maintenance\Data\" />
+    <Folder Include="Areas\Maintenance\Views\Shared\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>

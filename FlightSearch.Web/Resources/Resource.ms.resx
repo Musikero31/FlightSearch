@@ -120,6 +120,9 @@
   <data name="AirlineLogo" xml:space="preserve">
     <value>Logo Syarikat Penerbangan</value>
   </data>
+  <data name="AirlineMaintenance" xml:space="preserve">
+    <value>Penyelenggaraan Syarikat Penerbangan</value>
+  </data>
   <data name="AirlineName" xml:space="preserve">
     <value>Name Syarikat Penerbangan</value>
   </data>

@@ -21,8 +21,8 @@
             </div>
 
             <ul class="nav justify-content-end">
-                <li class="nav-item">@Html.ActionLink("Home", "Index", "Home", new { @class = "nav-link" })</li>
-                <li class="nav-item">@Html.ActionLink(Resource.LoadData, "LoadData", "Home", new { @class = "nav-link" })</li>
+                <li class="nav-item">@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                <li class="nav-item">@Html.ActionLink(Resource.LoadData, "LoadData", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                 <li class="nav-item">
                     <select class="form-control" id="ChangeLang">
                         @{
@@ -94,7 +94,7 @@
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/DataTables")
     @Scripts.Render("~/bundles/js")
-    <script>
+<script>
     $(function () {
 
         $("#ChangeLang").val("@Request.Cookies["culture"].Value");
@@ -109,7 +109,8 @@
                         window.location.reload();
                 });*@
             $.ajax({
-                url: "@Url.Action("ChangeLanguage", "FlightSearch", new { httproute = "DefaultApi" })",
+                url: "@Url.Action("ChangeLanguage", "FlightSearch", new { httproute = "DefaultApi", Area = "" })",
+                //url: "@Url.Action("ChangeLanguage", "FlightSearch", new { Area = "" })",
                 data: { "lang": changeLang },
                 dataType: 'json',
                 contentType: "application/json",
@@ -121,7 +122,7 @@
             });
         });
     });
-    </script>
+</script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

@@ -120,6 +120,9 @@
   <data name="AirlineLogo" xml:space="preserve">
     <value>Airline Logo</value>
   </data>
+  <data name="AirlineMaintenance" xml:space="preserve">
+    <value>Airline Maintenance</value>
+  </data>
   <data name="AirlineName" xml:space="preserve">
     <value>Airline Name</value>
   </data>

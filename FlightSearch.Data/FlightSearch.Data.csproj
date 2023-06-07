@@ -67,6 +67,7 @@
     <Compile Include="DataAccess\AirportDataAccess.cs" />
     <Compile Include="DataAccess\ScheduleDataAccess.cs" />
     <Compile Include="DataAccess\TimeTableDataAccess.cs" />
+    <Compile Include="DataAccess\UnitOfWork\AirlineWork.cs" />
     <Compile Include="EF\Entities\Airlines.cs" />
     <Compile Include="EF\Entities\AirlineSchedule.cs" />
     <Compile Include="EF\Entities\Airports.cs" />
@@ -115,8 +116,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\IRepository.cs" />
-    <Compile Include="Repository\Repository.cs" />
+    <Compile Include="Repository\FlightRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -156,6 +156,7 @@
       <DependentUpon>202101250859369_Alter-SearchFlight-StoredProcedure.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
