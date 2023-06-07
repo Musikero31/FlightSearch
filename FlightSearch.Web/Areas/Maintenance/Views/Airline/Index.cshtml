@@ -18,11 +18,11 @@
                                 <form id="AirlineForm">
                                     <div class="form-group">
                                         <label for="AirlineName">Airline Name</label>
-                                        <input id="AirlineName" class="form-control col-12" />
+                                        <input id="AirlineName" name="AirlineName" class="form-control col-12" />
                                     </div>
                                     <div class="form-group">
                                         <label for="CarrierCode">Carrier code</label>
-                                        <input id="CarrierCode" class="form-control col-12" />
+                                        <input id="CarrierCode" name="CarrierCode" class="form-control col-12" />
                                     </div>
                                     <div class="form-group">
                                         <label for="LogoURL">Logo URL</label>
@@ -109,7 +109,20 @@
 
                 $("#AirlineResultTable tbody").on("click", ".edit-row", EditRow);
 
-                $("#AirlineResultTable tbody").on("click", ".delete-row", DeleteRow);
+                $("#AirlineResultTable tbody").on("click", ".delete-row", function (e) {
+                    e.preventDefault();
+
+                    let id = $(this).attr("rowID");
+                    console.log("Value ID " + id);
+
+                    Util.confirmAction("Flight Search",
+                        "Are you sure you want to delete this record?",
+                        function (sel) {
+                            if (sel) {
+                                DeleteRow(parseInt(id));
+                            }
+                    });
+                });
             });
         }
 
@@ -120,9 +133,10 @@
                 return;
             }
 
+            Util.ShowLoading(true);
+
             let id = $("#ID").val();
 
-            //let verb = id === "" ? "POST" : "PUT";
             let verb = "";
             let url = "";
 
@@ -158,6 +172,11 @@
                     $("#LogoURL").val("");
                     $("#ID").val("");
                     $("#IsActive").val("");
+
+                    Util.alert("Flight Search", "Record saved");
+                },
+                complete: function () {
+                    Util.ShowLoading(false);
                 }
             });
         }
@@ -183,9 +202,20 @@
             });
         }
 
-        function DeleteRow() {
-            let val = $(this).attr("rowID");
-            console.log("Value ID " + val);
+        function DeleteRow(val) {
+            console.log("Deleting ID " + val);
+            Util.ShowLoading(true);
+
+            $.ajax({
+                method: "DELETE",
+                url: "@Url.Action("Delete", "AirlineAPI", new { httproute = "DefaultApi", Area = ""})/" + val,
+                success: function () {
+                    Util.alert("Flight Search", "Airline deleted", false, LoadAirlines);                    
+                },
+                complete: function () {
+                    Util.ShowLoading(false);
+                }
+            });
         }
 
         function ValidationRules() {
@@ -193,6 +223,10 @@
                 rules: {
                     "AirlineName": { required: true },
                     "CarrierCode": { required: true }
+                },
+                messages: {
+                    "AirlineName": { required: "Please enter airline name" },
+                    "CarrierCode": { required: "Please enter carrier code" }
                 }
             };
         }

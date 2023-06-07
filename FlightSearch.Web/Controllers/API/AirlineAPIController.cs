@@ -48,6 +48,7 @@ namespace FlightSearch.Web.Controllers.API
         // DELETE api/<controller>/5
         public void Delete(int id)
         {
+            _component.DeleteAirline(id);
         }
     }
 }
